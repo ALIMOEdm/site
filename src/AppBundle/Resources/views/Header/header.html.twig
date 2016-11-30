@@ -1,0 +1,151 @@
+<header>
+    <section class="section-topline">
+        <div class="container">
+            <div class="topline">
+                <div class="blocks">
+                    <div class="fa fa-map-marker"></div>
+                    <div class="city block">
+                        <div class="text">Источники:</div>
+                        <div class="city-select light">
+                            <button href="#modal-select-sources" class="btn btn-link dashed open-modal">Выбрать</button>
+                        </div>
+                    </div>
+                    <div class="divider block"></div>
+                    <div class="fa fa-clock-o"></div>
+                    <div class="date block">
+                        <div class="date text-light js-day">16.06.2016</div>
+                        <div class="time text-light js-time">12:30:14</div>
+                    </div>
+                    <div class="divider block"></div>
+                    <div class="fa fa-sun-o"></div>
+                    <div class="weather block">
+                        <div>
+                            <span class="temperature js-temperature"></span>
+                            <span class="wind js-wind"></span>
+                        </div>
+                        <div>
+                            <span class="water js-visibility"></span>
+                            <span class="humidity js-humidity"></span>
+                        </div>
+                    </div>
+                    <div class="divider block"></div>
+                    <div class="fa fa-usd"></div>
+                    <div class="quotes block">
+                        <div>EUR <span class="light js-eur"></span></div>
+                        <div>USD <span class="light js-usd"></span></div>
+                    </div>
+                    <div class="divider block"></div>
+                    <div class="fa fa-star"></div>
+                    <div class="celebration block">
+                        <div>Праздник:</div>
+                        <div class="light js-celebration dotdotdot "></div>
+                        <div class="full">
+                            <div class="title">Сегодня празнуется:</div>
+                            <div class="description light js-celebration"></div>
+                        </div>
+                    </div>
+                    <div class="divider block"></div>
+                    <!--.fa.fa-user-->
+                    <!--.registration.block-->
+                    <!--    div-->
+                    <!--        a.btn.btn-link.open-modal(href="#modal-unrelized-functionality") <span class="dashed">Вход и <br>регистрация</span>-->
+                    <!---->
+                    <!--.divider.block-->
+                    <div class="fa fa-users"></div>
+                    <div class="social block">
+                        <div><a href="{{ vk_group }}" class="btn btn-link">VK</a></div>
+                        {#<div><a href="#" class="btn btn-link">OK</a></div>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-mainmenu">
+        <div class="container">
+            <nav class="main-menu animated">
+                <div class="site-logo"><a href="{{ path('homepage') }}"><span>DISH</span><span>ALT</span></a></div>
+                <div class="search">
+                    <form action="{{ path('homepage') }}" method="get" id="search-form">
+                    <input type="text" {% if search_words is defined %} value="{{ search_words }}" {% endif %} placeholder="Поиск по новостям" form="search-form" name="search_words">
+                    <button type="submit" class="btn btn-link fa fa-search"></button>
+                    </form>
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li><a href="{{ path('homepage') }}"
+                                    {% if category_news is defined %}
+                                        class="active"
+                                    {% endif %}
+                                    >Новости</a></li>
+                        <li><a href="{{ path('discounts_index') }}" class=""
+                                    {% if category_discount is defined %}
+                                        class="active"
+                                    {% endif %}
+                                    >Акции и скидки</a></li>
+                        <li><a href="{{ path('job_searcher_index') }}" class=""
+                                    {% if category_job_seacher is defined %}
+                                        class="active"
+                                    {% endif %}
+                                    >Поиск работы</a></li>
+                    </ul>
+                </div>
+                {#<div class="often-searches hidden">#}
+                    {#<div class="title">Часто ищут:</div>#}
+                    {#<ul>#}
+                        {#<li><a href="full-card.html">Утонули дети в Алтайском крае</a><span class="search-count">243</span></li>#}
+                        {#<li><a href="full-card.html">Фестиваль красок</a><span class="search-count">137</span></li>#}
+                        {#<li><a href="full-card.html">Пляж в барнаульском парке</a><span class="search-count">129</span></li>#}
+                        {#<li><a href="full-card.html">Утонули дети</a><span class="search-count">86</span></li>#}
+                        {#<li><a href="full-card.html">Фестиваль красок в Барнауле</a><span class="search-count">43</span></li>#}
+                        {#<li><a href="full-card.html">Пляж в барнаульском парке</a><span class="search-count">24</span></li>#}
+                        {#<li><a href="full-card.html">Утонули дети в Алтайском крае</a><span class="search-count">243</span></li>#}
+                        {#<li><a href="full-card.html">Фестиваль красок</a><span class="search-count">137</span></li>#}
+                        {#<li><a href="full-card.html">Пляж в барнаульском парке</a><span class="search-count">129</span></li>#}
+                        {#<li><a href="full-card.html">Утонули дети</a><span class="search-count">86</span></li>#}
+                        {#<li><a href="full-card.html">Фестиваль красок в Барнауле</a><span class="search-count">43</span></li>#}
+                        {#<li><a href="full-card.html">Пляж в барнаульском парке</a><span class="search-count">24</span></li>#}
+                        {#<li><a href="full-card.html">Утонули дети в Алтайском крае</a><span class="search-count">243</span></li>#}
+                        {#<li><a href="full-card.html">Фестиваль красок</a><span class="search-count">137</span></li>#}
+                        {#<li><a href="full-card.html">Пляж в барнаульском парке</a><span class="search-count">129</span></li>#}
+                        {#<li><a href="full-card.html">Утонули дети</a><span class="search-count">86</span></li>#}
+                        {#<li><a href="full-card.html">Фестиваль красок в Барнауле</a><span class="search-count">43</span></li>#}
+                        {#<li><a href="full-card.html">Пляж в барнаульском парке</a><span class="search-count">24</span></li>#}
+                    {#</ul>#}
+                {#</div>#}
+            </nav>
+        </div>
+    </section>
+    {#<section class="section-filter">#}
+        {#<div class="container">#}
+            {#<div class="row">#}
+                {#<div class="col-xs-12 col-md-8">#}
+                    {#&#123;&#35;<div class="filter">&#35;&#125;#}
+                        {#&#123;&#35;<button data-role="apply-filters" title="Отфильтровать новости по выбранным параметрам" class="btn btn-default offset-bottom-5 pull-xs-right">Отфильтровать</button>&#35;&#125;#}
+                        {#&#123;&#35;<button href="#modal-select-sources" class="btn btn-link open-modal"><span class="fa fa-newspaper-o"></span><span class="dashed">Источники</span></button>&#35;&#125;#}
+                        {#&#123;&#35;<label class="btn btn-link"><span class="fa fa-clock-o"></span><span class="dashed">Диапазон дат:</span>&#35;&#125;#}
+                            {#&#123;&#35;<input {% if date_interval is defined %} value="{{ date_interval }}" {% endif %} name="date_interval" form="search-form" data-timepicker="false" data-range="true" data-position="bottom center" class="btn btn-link datepicker-here">&#35;&#125;#}
+                        {#&#123;&#35;</label>&#35;&#125;#}
+
+
+
+                        {#&#123;&#35;&#123;&#35;<button href="#modal-select-sources" class="btn btn-link open-modal offset-bottom-5"><span class="fa fa-newspaper-o"></span><span class="dashed">Источники</span></button>&#35;&#125;&#35;&#125;#}
+                        {#&#123;&#35;&#123;&#35;<label class="btn btn-lin offset-bottom-5k"><span class="fa fa-clock-o"></span><span class="dashed">Диапазон дат:</span>&#35;&#125;&#35;&#125;#}
+                            {#&#123;&#35;&#123;&#35;<input {% if date_interval is defined %} value="{{ date_interval }}" {% endif %} name="date_interval" form="search-form" data-timepicker="false" data-range="true" data-position="bottom center" class="btn btn-link datepicker-here">&#35;&#125;&#35;&#125;#}
+                        {#&#123;&#35;&#123;&#35;</label>&#35;&#125;&#35;&#125;#}
+                        {#&#123;&#35;&#123;&#35;<button class="btn btn-default offset-bottom-5" data-role="apply-filters">Отфильтровать</button>&#35;&#125;&#35;&#125;#}
+                    {#&#123;&#35;</div>&#35;&#125;#}
+                {#</div>#}
+                {#<div class="col-xs-12 col-md-4">#}
+                    {#<div class="options pull-sm-left pull-md-right">#}
+                        {#<!--a.btn.btn-link.open-modal(href="#modal-unrelized-functionality") Предложить тему-->#}
+                        {#<!--a.btn.btn-link.open-modal(href="#modal-offer-source")#}
+                        {#span.fa.fa-commenting-o#}
+                        {#span.dashed Предложить источник#}
+                        {#-->#}
+                        {#<!--a.btn.btn-link.open-modal(href="#modal-unrelized-functionality") Добавить новость-->#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+    {#</section>#}
+</header>

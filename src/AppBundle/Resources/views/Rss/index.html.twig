@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>{{ rss_title }}</title>
+        <link>{{ rss_link }}</link>
+        <description>{{ rss_description }}</description>
+        <lastBuildDate>{{ lastUpdated }}</lastBuildDate>
+        <atom:link href="{{ url('get_rss_news') }}" rel="self" type="application/rss+xml" />
+
+        {% for n in news %}
+            <item>
+                <title>
+                    {% if n.getNewsTitle %}
+                        {{ n.getNewsTitle }}
+                    {% else %}
+                        {{ n.getNewsTextOrigin }}
+                    {% endif %}
+                </title>
+                <link>
+                    {{ url('one_news_router', {'gr_news_id': n.getNewsIdFunc }) }}
+                </link>
+                <description>{{ n.getText }}
+                    <img src="{{ n.getImage('main_news_2').url }}" alt=""/>
+                </description>
+                <pubDate>{{ n.getCreatedAt.format(rss_date_format) }}</pubDate>
+                <guid>
+                    {{ url('one_news_router', {'gr_news_id': n.getNewsIdFunc }) }}
+                </guid>
+                {#<media:thumbnail url='{{ n.getImage('main_news_2').url }}' />#}
+                <enclosure url='{{ n.getImage('main_news_2').url }}' length="{{ n.getImage('main_news_2').url|imgSize }}"
+                           type="{{ n.getImage('main_news_2').url|imgMimeType }}"/>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

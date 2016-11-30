@@ -1,0 +1,37 @@
+{% extends 'AppBundle::layout_preview_pages.html.twig' %}
+{% block preview %}
+
+    <div class="new-cards scroll">
+        {% for news in entities %}
+            {{ include('AppBundle:Subtempates:news_preview.html.twig', {'news': news}) }}
+        {% endfor %}
+    </div>
+    <div class="pagination-wrapper">
+        {{ knp_pagination_render(entities) }}
+    </div>
+
+{% endblock %}
+
+    {% block seo_block %}
+        {#<section class="aboutus-sect">#}
+            {#<div class="container">#}
+                {#<div class="block aboutus"><p><strong>Dish-Alt </strong>- это свежие новости всех городов Алтайского края в#}
+                        {#одном месте.#}
+                        {#Мы собираем информацию из различных источников и предоставляем в удобном формате.</p>#}
+
+                    {#<p>У нас вы можете узнать как информацию, касающуюся вашего города, например, текущую дату и время,#}
+                        {#актуальную информацию о погоде,#}
+                        {#так и более глобальную, например, сколько стоит доллар, или какой сегодня праздник.</p>#}
+
+                    {#<p>Ну и, конечно же, самые свежие новости таких городов Алтайского края, как:</p>#}
+
+                    {#<div class="cities">#}
+                        {#<span>Алейск</span><span>Барнаул</span><span>Белокуриха</span><span>Бийск</span><span>Горняк</span><span>Заринск</span><span>Змеиногорск</span><span>Камень на оби</span><span>Новоалтайск</span><span>Рубцовск</span><span>Славгород</span><span>Яровое</span>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</section>#}
+    {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

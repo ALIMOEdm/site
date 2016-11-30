@@ -1,0 +1,139 @@
+{% extends 'AppBundle::layout_main_page.html.twig' %}
+{% set title = '' %}
+{% set description = '' %}
+{% set title = news.getNewsTitle %}
+{% set description = news.getNewsDescription %}
+{% block meta_information %}
+
+    <!-- Twitter -->
+    <meta content="@{{ twitter_account }}" name="twitter:creator">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{{ description }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@{{ site_url }}">
+    {% if news.getImage('main_news_2') %}
+        <meta name="twitter:image" content="{{ news.getImage('main_news_2').url }}">
+        <link rel="image_src" href="{{ news.getImage('main_news_2').url }}">
+    {% endif %}
+    <!-- Twitter -->
+
+    <!-- Facebook -->
+    <meta name="og:description" content="{{ description }}">
+    <meta name="og:title" content="{{ title }}">
+    <meta property="og:url" content="{{ absolute_url(path('one_news_router', {'gr_news_id': news.getNewsIdFunc })) }}">
+
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="450">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="{{ site_url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:publisher" content="https://www.facebook.com/www.amic.ru">
+    {% if news.getImage('main_news_2') %}
+        <meta name="og:image" content="{{ news.getImage('main_news_2').url }}">
+    {% endif %}
+    <!-- Facebook -->
+
+    <meta name="publish_date" content="{{ news.getNewsFormatDate }}">
+
+    <meta property="url" content="{{ absolute_url(path('one_news_router', {'gr_news_id': news.getNewsIdFunc })) }}">
+    {% if news.getImage('main_news_2') %}
+        <meta property="image" content="{{ news.getImage('main_news_2').url }}">
+    {% endif %}
+    <meta property="title" content="{{ title }}">
+{% endblock %}
+
+
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block description_keywords %}
+    <meta name="description" content="{{ description }}">
+    <meta name="keywords" content="новости, Барнаул, Алтайский край, последнее, животные, главные новости, главное, спорт, путешесвия, афиша">
+{% endblock %}
+
+
+{% block main_news %}
+    {% set text = '' %}
+    {% if news.getNewsTextParsed %}
+        {% set text = news.getNewsTextParsed %}
+    {% else %}
+        {% set text = news.getNewsTextOrigin %}
+    {% endif %}
+<section class="section-full-new">
+    <div class="container">
+        <div class="new-card new-card-full">
+        {% if  news.getImage('main_news_2') %}
+            <div class="new-card-full-image"
+                 data-role="news-image"
+                 data-url="{{ news.getImage('main_news_2').url }}
+                 "></div>
+        {% else %}
+            <div class="new-card-full-image"
+                 data-role="news-image"
+                 data-url="{{ asset('/white_design_2/img/images/default.jpg') }}"
+                    ></div>
+        {% endif %}
+            <div class="content">
+                <h1 class="title">{{ title }}</h1>
+                <div class="description">
+                    <p class="one-news-main-content" data-text="{{ text }}" data-id="{{ news.id }}">
+                        <script>
+                            var el = document.querySelector("[data-id='{{ news.id }}']");
+                            el.innerHTML = el.getAttribute('data-text');
+                        </script>
+                    </p>
+
+                    {% if news.isDiscount %}
+                        {% for image in news.getPhotos() %}
+
+                            <img src="{{ image.getUrl }}" alt="{{ title }}" style="display:inline-block;margin: 10px; outline: 4px solid rgb(176, 176, 176);"/>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div>
+                        <span>
+                            Теги: Новости Барнаула. Новости Алтайского края. {{ news.getVkGroup.getGroupTitle }}
+                        </span>
+                            {#<p>#}
+                                {##}
+                            {#</p>#}
+                    </div>
+                    <div class="read-in-source">
+                        <span class="fa fa-newspaper-o"></span>
+                        <a href="{% if news.getNewsSiteLink %}{{ news.getNewsSiteLink }}{% else %}{{ news.getNewsVkLink }}
+                    {% endif %}" class="btn btn-link" target="_blank" style="color: #b30000">
+                            <span>Читать в источнике</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="footer">
+                <div class="row">
+                    <div class="col-xs-8 text-xs-left">
+                        <div class="publication-date element">
+                            <div class="fa fa-clock-o"></div><a href="#" title="Отфильтровать новости по дате" class="btn btn-link"><span>{{ news.getNewsFormatDate }}</span></a>
+                        </div>
+                        <div class="divider element"></div>
+                        <div class="source element">
+                            <div class="fa fa-newspaper-o"></div><a href="#" title="Отфильтровать новости по группе" class="btn btn-link">{{ news.getVkGroup.getGroupTitle }}</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 text-xs-right">
+                        <div class="views element">
+                            <div class="fa fa-eye"></div><span>{{ news.getCntViews }}</span>
+                        </div>
+                        {#<div class="divider element"></div>#}
+                        {#<div class="comments element">#}
+                            {#<div class="fa fa-comment-o"></div><span>8</span>#}
+                        {#</div>#}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block main_content %}
+    <script src="{{ asset('white_design/libs/ck_editor/ckeditor.js') }}"></script>
+    <script src="{{ asset('white_design/libs/ck_editor/config.js') }}"></script>
+    <script src="{{ asset('white_design/libs/ck_editor/ru.js') }}"></script>
+    <script src="{{ asset('white_design/libs/ck_editor/plugin.js') }}"></script>
+    <script src="{{ asset('white_design/libs/ck_editor/code_mirror_ru.js') }}"></script>
+    <script src="{{ asset('white_design/libs/ck_editor/codemirror.js') }}"></script>
+    <script src="{{ asset('white_design/libs/ck_editor/xml.js') }}"></script>
+    <script src="{{ asset('white_design/libs/ck_editor/javascript.js') }}"></script>
+    <script src="{{ asset('white_design/libs/ck_editor/css.js') }}"></script>
+    <script src="{{ asset('white_design/libs/ck_editor/htmlmixed.js') }}"></script>
+    <script src="{{ asset('white_design/libs/ck_editor/styles.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('white_design/libs/ck_editor/editor.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('white_design/libs/ck_editor/codemirror.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('white_design/libs/ck_editor/rubyblue.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('white_design/libs/ck_editor/contents.css') }}"/>
+
+    {% block user_news_content %}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends '::base_old.html.twig' %}
+
+
+{% block body %}
+    {% for entity in entities %}
+        {% if not entity.getNewsVkLink %}
+        <div data-text="{{ entity.getNewsDecodeText }}" data-id="{{ entity.id }}"></div>
+        <script>
+            var el = document.querySelector("[data-id='{{ entity.id }}']");
+            el.innerHTML = el.getAttribute('data-text');
+        </script>
+            {% endif %}
+    {% endfor %}
+{% endblock %}

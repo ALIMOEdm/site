@@ -1,0 +1,28 @@
+<div class="block hotnew">
+    <div class="hotnew_content">
+        <a href="{{ path('one_news_router', {'gr_news_id': news.getNewsIdFunc }) }}" class="hotnew_title fullarticle-link js-main-news-description">
+            {% set text ='' %}
+            {% if news.getNewsTitle %}
+                {% set text = news.getNewsTitle %}
+            {% else %}
+                {% set text = news.getNewsDescription %}
+            {% endif %}
+
+            <div  data-text="{{ text }}" data-id="diff_{{ news.id }}">
+                <script>
+                    var el = document.querySelector("[data-id='diff_{{ news.id }}']");
+                    el.innerHTML = el.getAttribute('data-text');
+                </script>
+            </div>
+        </a>
+        <figure class="hotnew_cover">
+            <img src="{{ news.getImage('news').url }}">
+        </figure>
+        <div class="hotnew_info">
+            <a href="#">
+                <span href="#" class="hotnew_time">{{ news.getNewsFormatDate }}</span>
+            </a>
+        </div>
+    </div>
+    <hr/>
+</div>

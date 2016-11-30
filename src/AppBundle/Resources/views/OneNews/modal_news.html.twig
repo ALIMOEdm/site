@@ -1,0 +1,38 @@
+<div class="modal-header fullnew_header">
+    <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+        <span aria-hidden="true">×</span>
+    </button>
+    <div class="row">
+        <div class="col-sm-9">
+            <h2 id="myModalLabel" class="modal-title fullnew_title">
+                {{ news.getNewsTitle }}
+            </h2>
+        </div>
+        <div class="col-sm-3">
+            <a href="#" class="fullnew_info">
+                <span class="fullnew_original-article flaticon-interface"></span>
+                <span class="fullnew_date">06.04.2016</span>
+                <span class="fullnew_time">15:22</span>
+            </a>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="modal-body fullnew_description">
+    {% set text = '' %}
+    {% if news.getNewsTextParsed %}
+        {% set text = news.getNewsTextParsed %}
+    {% else %}
+        {% set text = news.getText %}
+    {% endif %}
+    <p class="one-news-main-content" style="" data-text="{{ text }}" data-id="{{ news.id }}">
+        <script>
+            var el = document.querySelector("[data-id='{{ news.id }}']");
+            el.innerHTML = el.getAttribute('data-text');
+        </script>
+    </p>
+</div>
+<hr>
+<div class="modal-footer fullnew_footer">
+    <div class="vk-comments">Комменты</div>
+</div>

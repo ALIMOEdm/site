@@ -1,0 +1,53 @@
+<div style="display: none; " class="js-filters-wr filters-wr col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div style="">
+        {% block filters %}
+            {% if groups is defined %}
+                <form class="" action="{{ filter_path }}" method="post">
+                    <div class="row">
+                        <div class="filters-wr col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group multiselect-wr" style="width: 100%">
+                                <select name="group_filter[]" id="" multiple="multiple" class="form-control">
+                                    {% for group in groups %}
+                                        <option value="{{ group.getId }}" {% if group.getId in need_groups %} selected {% endif %}>{{ group.getGroupTitle }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="filters-wr col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <input type="text" id="date_from" name="date_from"  class="form-control" placeholder="Начальная дата"
+                                        {% if date_start is defined and date_start %}
+                                            value="{{ date_start|date(date_filter_format) }}"
+                                        {% endif %}
+                                        />
+                            </div>
+                        </div>
+                        <div class="filters-wr col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <input type="text" id="date_to" name="date_to"  class="form-control" placeholder="Конечная дата"
+                                        {% if date_finish is defined and date_finish %}
+                                            value="{{ date_finish|date(date_filter_format) }}"
+                                        {% endif %}
+                                        />
+                            </div>
+                        </div>
+                    </div>
+                    {#<div class="row">#}
+                        {#<div class="filters-wr col-xs-12 col-sm-12 col-md-12 col-lg-12">#}
+                            {#<div class="form-group">#}
+                                {#<input type="text" name="search_words"  class="form-control" placeholder="Поисковый запрос...."#}
+                                        {#{% if search_words is defined and search_words %}#}
+                                            {#value="{{ search_words }}"#}
+                                        {#{% endif %}#}
+                                        {#/>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                    <button class="btn btn-default full-width" type="submit">Применить</button>
+                    <button class="btn btn-default full-width ls-clear-filters" type="button">Очистить</button>
+                </form>
+            {% endif %}
+        {% endblock %}
+    </div>
+</div>

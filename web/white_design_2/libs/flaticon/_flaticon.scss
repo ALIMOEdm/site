@@ -1,0 +1,51 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 20/06/2016 18:52
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("../libs/flaticon/Flaticon.eot");
+  src: url("../libs/flaticon/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("../libs/flaticon/Flaticon.woff") format("woff"),
+       url("../libs/flaticon/Flaticon.ttf") format("truetype"),
+       url("../libs/flaticon/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("../libs/flaticon/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-glasses:before { content: "\f100"; }
+.flaticon-history-button:before { content: "\f101"; }
+.flaticon-menu-button:before { content: "\f102"; }
+.flaticon-nature:before { content: "\f103"; }
+.flaticon-open-book:before { content: "\f104"; }
+.flaticon-user:before { content: "\f105"; }
+    
+    $font-Flaticon-glasses: "\f100";
+    $font-Flaticon-history-button: "\f101";
+    $font-Flaticon-menu-button: "\f102";
+    $font-Flaticon-nature: "\f103";
+    $font-Flaticon-open-book: "\f104";
+    $font-Flaticon-user: "\f105";

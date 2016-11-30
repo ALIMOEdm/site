@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>userNews list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Text</th>
+                <th>Main_image</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Deleted</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for userNews in userNews %}
+            <tr>
+                <td><a href="{{ path('usernews_usernews_show', { 'id': userNews.id }) }}">{{ userNews.id }}</a></td>
+                <td>{{ userNews.title }}</td>
+                <td>{{ userNews.text }}</td>
+                <td>{{ userNews.mainimage }}</td>
+                <td>{% if userNews.createdAt %}{{ userNews.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if userNews.updatedAt %}{{ userNews.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if userNews.deleted %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('usernews_usernews_show', { 'id': userNews.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('usernews_usernews_edit', { 'id': userNews.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('usernews_usernews_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

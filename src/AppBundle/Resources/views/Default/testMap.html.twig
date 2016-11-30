@@ -1,0 +1,43 @@
+{% extends 'AppBundle::layout_preview_pages.html.twig' %}
+
+{% block preview %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <style>
+        #test_map { height: 500px; }
+    </style>
+    <div>
+        <input type="hidden" name="routes_list" value="{{ routes }}"/>
+        <input type="hidden" name="stations_list" value="{{ stations }}"/>
+        <input type="hidden" name="zones_list" value="{{ zones }}"/>
+    </div>
+    <div>
+        <div data-role="routes_list">
+            <div>Автобусы</div>
+            <div data-type="route_А"></div>
+            <div>Маршрутные такси</div>
+            <div data-type="route_М"></div>
+            <div>Трамваи</div>
+            <div data-type="route_Тр"></div>
+            <div>Троллейбусы</div>
+            <div data-type="route_Т"></div>
+        </div>
+        <div>
+            <div id="test_map"></div>
+        </div>
+    </div>
+
+    <script>
+        var busIconPath = "{{ asset('white_design_2/img/traffic/bus.png')}}";
+        var marshIconPath = "{{ asset('white_design_2/img/traffic/marsh.png')}}";
+        var tramIconPath = "{{ asset('white_design_2/img/traffic/tram.png')}}";
+        var trollIconPath = "{{ asset('white_design_2/img/traffic/troll.png')}}";
+        var oldVehicleIconPath = "{{ asset('white_design_2/img/traffic/old_veh.png')}}";
+    </script>
+
+    <script type="text/route_template">
+        <label for="">
+            <input type="checkbox" name="{=name=}" value="{=value=}"/>{=title=}
+        </label>
+    </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'AppBundle:UserNews:layout_user_news.html.twig' %}
+
+{% block user_news_content %}
+    <h1>UserNews creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('usernews_usernews_index') }}">Back to the list</a>
+        </li>
+    </ul>
+
+    <script>
+        CKEDITOR.replace( 'user_news_text' )
+    </script>
+
+
+
+
+{% endblock %}

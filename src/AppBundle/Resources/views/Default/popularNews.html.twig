@@ -1,0 +1,56 @@
+<section class="section-hot-news">
+    <div class="container">
+        <div class="section-title-icon fa fa-commenting-o"></div>
+        <h2 class="section-title"><span>Самое обсуждаемое</span></h2>
+        <div class="hot-news">
+            <div class="carousel-3 owl-carousel owl-theme">
+                {% for n in news %}
+                    <div class="new-card hot-new">
+                        <a href="{{ path('one_news_router', {'gr_news_id': n.getNewsIdFunc }) }}">
+                            {% if n.getNewsTitle %}
+                                <div class="title dotdotdot">
+                                    {{ n.getNewsTitle }}
+                                </div>
+                            {% endif %}
+
+                                <div class="description dotdotdot is-truncated">
+                                    {% if n.getNewsDescription %}
+                                    <p class="news-description-text" data-text="{{ n.getNewsDescription }}" data-id="{{ n.id }}hot">
+                                        <script>
+                                            var el = document.querySelector("[data-id='{{ n.id }}hot']");
+                                            el.innerHTML = el.getAttribute('data-text');
+                                        </script>
+                                    </p>
+                                    {% endif %}
+                                </div>
+                        </a>
+                        <div class="footer">
+                            <div class="row">
+                                <div class="col-xs-9 text-xs-left">
+                                    <div class="publication-date element">
+                                        <div class="fa fa-fw fa-clock-o"></div><a href="#" title="Отфильтровать новости по дате" class="btn btn-link"><span>{{ n.getNewsFormatDate }}</span></a>
+                                    </div>
+                                    <div class="source element dotdotdot">
+                                        <div class="fa fa-fw fa-newspaper-o"></div><a href="#" title="Отфильтровать новости по группе" class="btn btn-link">{{ n.getVkGroup.getGroupTitle }}</a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 text-xs-right">
+                                    <div class="views element">
+                                        <div class="fa fa-fw fa-eye"></div><span>{{ n.getCntViews }}</span>
+                                    </div>
+                                    {#<div class="comments element">#}
+                                        {#<div class="fa fa-fw fa-comment-o"></div><span>8</span>#}
+                                    {#</div>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="owl-custom-navigation">
+                <div class="btn prev"></div>
+                <div class="btn next"></div>
+            </div>
+        </div>
+    </div>
+</section>

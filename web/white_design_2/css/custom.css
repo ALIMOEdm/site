@@ -1,0 +1,81 @@
+.section-news .new-cards{
+    max-height: inherit;
+}
+
+.new-card-full .description{
+    color: #777;
+    -webkit-transition: .2s;
+    transition: .2s;
+    overflow: hidden;
+    padding: 5px 0;
+    height: inherit;
+}
+/*.new-card .description{*/
+    /*height: inherit;*/
+    /*padding: 2px 0;*/
+/*}*/
+.section-news .new-card .description{
+    max-height: 160px;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.section-news .new-card .title,
+.section-news .new-card .description,
+.section-news .new-card .footer
+{
+    margin-left: 200px;
+}
+
+@media only screen and (max-width: 767px) {
+    .section-news .new-card .title,
+    .section-news .new-card .description,
+    .section-news .new-card .footer
+    {
+        margin-left: 0;
+    }
+}
+
+.new-card.new-card-full .image{
+    background: none;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.new-card.new-card-full .title{
+    color: #A41B1B;
+}
+
+.section-humor a:hover .title{
+    color: #A41B1B;
+}
+
+.news-description-text{
+    margin: 0;
+}
+
+.section-news{
+    margin-bottom: 50px;
+}
+.new-card .description{
+    color: #4A4A4A;
+}
+
+.modal-select-sources .groups .group .img{
+    height: 150px;
+}
+.new-card .title{
+    font-size: 16px;
+}
+
+.new-card-full .title{
+    font-size: 20px !important;
+}
+
+.offset-bottom-5{
+    margin-bottom: 5px;
+}
+
+.section-news .new-cards .mCSB_inside > .mCSB_container{
+    margin-right: 0;
+}

@@ -1,0 +1,16 @@
+metrics:
+    process:
+        label: Process Calls
+        matching_calls:
+            php:
+                - callee: '=AppBundle\Controller\DefaultController::indexNews'
+
+scenarios:
+    Homepage:
+        - /
+    Discount Page:
+        - /discounts
+    Job page:
+        - /job
+    CS50 page:
+        - /java-rush

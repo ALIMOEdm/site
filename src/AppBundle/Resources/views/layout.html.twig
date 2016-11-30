@@ -1,0 +1,98 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <!-- /Yandex.Metrika counter -->
+    {#http://webyzona.com//templates/themeforest/globalnews/##}
+    {{ include('AppBundle:Header:header.html.twig') }}
+    {% block main_content %}
+
+    {% endblock %}
+    {{ include('AppBundle:Footer:footer.html.twig') }}
+    <div class="overlay"></div>
+    <div id="modal-select-sources" class="modal modal-select-sources white-popup-block mfp-hide mfp-with-anim">
+        <div class="title"><span>Выберите источники новостей</span><span class="actions pull-xs-right">
+        <button class="btn btn-link dashed select-all">Выбрать все</button>
+        <button class="btn btn-link dashed deselect-all">Убрать выбор со всех</button>
+        <button class="btn btn-default submit" data-role="apply-group-filter">Применить выбор</button></span></div>
+        <div class="categories">
+            <div class="tabs">
+                <ul class="tabs__caption">
+                    <li class="btn btn-link dashed active">По группам</li>
+                    <li class="btn btn-link dashed">По городам</li>
+                </ul>
+                <div class="tabs__content active">
+                    <div data-toggle="buttons" class="groups">
+                        {% if need_groups is defined %}
+                            {{ render(controller(
+                            'AppBundle:Default:getGroups', {'selected_groups': need_groups}
+                            )) }}
+                        {% else %}
+                            {{ render(controller(
+                            'AppBundle:Default:getGroups'
+                            )) }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="tabs__content">
+                    <p>Фильтрация по городу еще в разработке</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer clearfix"><span class="actions pull-xs-right">
+        <button class="btn btn-link dashed select-all">Выбрать все</button>
+        <button class="btn btn-link dashed deselect-all">Убрать выбор со всех</button>
+        <button class="btn btn-default submit">Применить выбор</button></span></div>
+    </div>
+    <div id="modal-unrelized-functionality" class="modal modal-unrelized-functionality white-popup-block mfp-hide mfp-with-anim">
+        <div class="title"><span>Дополнительный функционал</span></div>
+        <div class="description">
+            <p>Этот функционал еще не реализован :( <br>На даный момент мы ведем активную разработку следующих фишек:</p>
+            <p class="title">Личный кабинет пользователя</p>
+            <p>Это позволит вам добавлять свои новости на сайт, добавлять понравившиеся вам новости в закладки.</p>
+            <p class="title">Страница со скидками и акциями</p>
+            <p>Чтобы быть в курсе всех акций, которые проводят магазины вашего города.</p>
+            <p class="title">Страница с вакансиями</p>
+            <p>Все вакансии города на одном сайте.</p>
+            <div class="wish">
+                Все пожелания и предложения пишите в нашу <a href="//new.vk.com/topic-97802864_33156713" class="link">группу вконтакте</a>
+                или лично <a href="//vk.com/dem585" class="link">этому человеку</a> или <a href="//vk.com/pzyclone" class="link">этому человеку</a>.
+                <br>Голосуйте за понравившийся функционал у нас <a href="//new.vk.com/barneo_news" class="link">на стене</a>.
+                Голосование будет определять приоритет реализации фишек.
+            </div>
+        </div>
+    </div>
+    <div class="hidden"></div>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter35873715 = new Ya.Metrika({
+                        id:35873715,
+                        clickmap:true,
+                        trackLinks:true,
+                        accurateTrackBounce:true,
+                        webvisor:true
+                    });
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript>
+        <div>
+            <img src="https://mc.yandex.ru/watch/35873715" style="position:absolute; left:-9999px;" alt="" />
+        </div>
+    </noscript>
+{% endblock %}

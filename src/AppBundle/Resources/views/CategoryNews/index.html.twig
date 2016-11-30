@@ -1,0 +1,9 @@
+{% extends 'AppBundle::layout_main_page.html.twig' %}
+{% block main_news %}
+    {% for news in entities %}
+        {{ include('AppBundle:Subtempates:news_preview.html.twig', {'news': news}) }}
+    {% endfor %}
+    <div class="pagination-wrapper">
+        {{ knp_pagination_render(entities) }}
+    </div>
+{% endblock %}

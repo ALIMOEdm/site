@@ -1,0 +1,16 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block main_content %}
+    <main>
+
+        {% block main_news %}
+        {% endblock %}
+
+        {% block seo_block %}
+        {% endblock %}
+
+        {{ render(controller(
+        'AppBundle:Default:popularNews'
+        )) }}
+
+    </main>
+{% endblock %}

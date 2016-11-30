@@ -1,0 +1,119 @@
+body {
+  font-size: 16px;
+  min-width: 320px;
+  position: relative;
+  line-height: 1.6;
+  font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
+  background-color: #fafafa; }
+
+.hidden {
+  display: none; }
+
+section.headerline {
+  padding: 30px 0; }
+
+.block.logo a {
+  color: #333333;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 50px;
+  font-family: "Roboto Condensed";
+  font-weight: bold;
+  -webkit-transform: scalex(0.9);
+  -ms-transform: scalex(0.9);
+  transform: scalex(0.9);
+  -webkit-transform-origin: left;
+  -ms-transform-origin: left;
+  transform-origin: left;
+  line-height: 0.7;
+  letter-spacing: -3px; }
+  .block.logo a span:first-child {
+    position: relative;
+    z-index: 10; }
+  .block.logo a span:nth-child(2) {
+    margin-left: 0;
+    color: #aaaaaa;
+    position: relative;
+    z-index: -10; }
+
+.dayinfo {
+  margin-top: 4px;
+  margin-bottom: 15px;
+}
+
+.dayinfo a.element {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 40px;
+    line-height: 1;
+    color: #555;
+    text-decoration: none;
+    font-family: "Roboto Condensed"; }
+    .dayinfo a.element:hover {
+      color: #1f8599; }
+    .dayinfo a.element:last-child {
+      margin-right: 0; }
+
+.block.search {
+  margin-top: 6px; }
+  .block.search input {
+    width: 100%; }
+
+.block.mycity {
+  white-space: nowrap;
+  text-align: right;
+  margin-top: 8px; }
+  .block.mycity a {
+    border-bottom: 1px dashed #555;
+    text-decoration: none;
+    color: #555;
+    font-family: "Roboto Condensed"; }
+    .block.mycity a:hover {
+      border-bottom: 1px dashed #1f8599;
+      color: #1f8599; }
+
+.block.mainmenu {
+  margin-bottom: 20px; }
+  .block.mainmenu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .block.mainmenu ul li {
+      display: inline-block;
+      margin-right: 20px;
+      font-family: "Roboto Condensed";
+      font-size: 20px;
+      font-weight: bold;
+      position: relative; }
+      .block.mainmenu ul li:last-child {
+        margin-right: 0; }
+      .block.mainmenu ul li a, .block.mainmenu ul li span {
+        color: #333;
+        text-decoration: none;
+        cursor: pointer; }
+        .block.mainmenu ul li a:hover, .block.mainmenu ul li span:hover {
+          color: #1f8599; }
+      .block.mainmenu ul li ul {
+        position: absolute;
+        top: 100%;
+        left: -45%;
+        z-index: 100;
+        padding: 10px 20px;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: all .3s;
+        transition: all .3s;
+        -webkit-box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.5);
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        text-align: left; }
+        .block.mainmenu ul li ul li {
+          display: block !important;
+          font-size: 17px; }
+      .block.mainmenu ul li:hover ul {
+        opacity: 1;
+        visibility: visible; }

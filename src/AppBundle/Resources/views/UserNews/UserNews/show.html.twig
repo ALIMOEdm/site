@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>userNews</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ userNews.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ userNews.title }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ userNews.text }}</td>
+            </tr>
+            <tr>
+                <th>Main_image</th>
+                <td>{{ userNews.mainimage }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if userNews.createdAt %}{{ userNews.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if userNews.updatedAt %}{{ userNews.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Deleted</th>
+                <td>{% if userNews.deleted %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('usernews_usernews_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('usernews_usernews_edit', { 'id': userNews.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

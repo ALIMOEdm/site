@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss xmlns:yandex="http://news.yandex.ru" xmlns:media="http://search.yahoo.com/mrss/"
+     version="2.0">
+    <channel>
+        <title>{{ rss_title }}</title>
+        <link>{{ rss_link }}</link>
+        <description>{{ rss_description }}</description>
+        <lastBuildDate>{{ lastUpdated }}</lastBuildDate>
+
+        <yandex:logo>{{ absolute_url(asset('white_design/img/site-logo.jpg')) }}</yandex:logo>
+        <yandex:logo type="square">{{ absolute_url(asset('white_design/img/site-logo.jpg')) }}</yandex:logo>
+
+        {% for n in news %}
+            <item>
+                <title>
+                    {{ n.getNewsTitle | filterXMLForYandex }}
+                </title>
+                <description>
+                    {{ n.getNewsDescription | filterXMLForYandex }}
+                </description>
+                <link>
+                    {{ url('one_news_router', {'gr_news_id': n.getNewsIdFunc }) | filterXMLForYandex }}
+                </link>
+                <pubDate>
+                    {{ n.getCreatedAt.format(rss_date_format) }}
+                </pubDate>
+                <yandex:full-text>
+                    {{ n.getNewsTextParsed | filterXMLForYandex }}
+                </yandex:full-text>
+                <pdalink>
+                    {{ url('one_news_router', {'gr_news_id': n.getNewsIdFunc }) }}
+                </pdalink>
+
+                <yandex:genre>message</yandex:genre>
+                <author>Михаил Илларионов</author>
+                {#<category>Технологии</category>#}
+
+                <guid>
+                    {{ url('one_news_router', {'gr_news_id': n.getNewsIdFunc }) }}
+                </guid>
+                {#<media:thumbnail url='{{ n.getImage('main_news_2').url }}' />#}
+                <enclosure url='{{ n.getImage('main_news_2').url }}' length="{{ n.getImage('main_news_2').url|imgSize }}"
+                           type="{{ n.getImage('main_news_2').url|imgMimeType }}"/>
+
+
+
+
+                {#Встречающиеся в тексте символы < > & ' " необходимо заменять на соответствующие#}
+                {#элементы:#}
+                {#& на &amp;#}
+                {#< на &lt;#}
+                {#> на &gt;#}
+                {#' на &apos;#}
+                {#" на &quot;#}
+                {#(здесь точка с запятой – это не разделитель данного списка, а обязательная часть#}
+                {#элемента!)#}
+                {#Замены должны производиться во всех элементах <item> и <channel> – в#}
+                        {#<yandex:full-text>, <link>, <title>, <enclosure> и др.#}
+                                    {#Пример, ссылка "http://some.host.ru/?id=1&page=10" приводится к виду#}
+                                    {#"http://some.host.ru/?id=1&amp;page=10"#}
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

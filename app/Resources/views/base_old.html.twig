@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Новостной агрегатор, последние новости Алтайского края">
+        <meta name="keywords" content="новости, Барнаул, Алтайский край, последнее, животные, главные новости, главное, спорт, путешесвия, афиша">
+        <meta name="author" content="dish-style">
+
+        <meta property="og:site_name" content="Новости Барнаула">
+        <meta name="application-name" content="Новости Барнаула">
+
+
+        <title>{% block title %}Новости Барнаула и Алтайского края!{% endblock %}</title>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800" rel="stylesheet" type="text/css">
+
+        {% block meta_information %}
+            <meta property="og:description" content="Новости портала оперативны, эксклюзивны и разнообразны. Миссия портала - предоставлять читателям полный спектр новостей, событий, прогнозов, перспектив, дать возможность познакомиться с мнением известных в стране и за рубежом экспертов, и высказать свою точку зрения.">
+            <meta property="og:title" content="dish-alt — Новостной агрегатор, последние новости Алтайского края">
+        {% endblock %}
+
+
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('newsup-html/css/bootstrap.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('newsup-html/css/main.css') }}"/>
+            {#<link rel="stylesheet" href="{{ asset('newsup-html/css/bootstrap-tagsinput.css') }}"/>#}
+            {#<link rel="stylesheet" href="{{ asset('newsup-html/css/jasny-bootstrap.min.css') }}"/>#}
+            {#<link rel="stylesheet" href="{{ asset('newsup-html/css/font-awesome.css') }}"/>#}
+            {#<link rel="stylesheet" href="{{ asset('newsup-html/css/effect2.css') }}"/>#}
+            <link rel="stylesheet" href="{{ asset('newsup-html/css/animate.css') }}"/>
+
+            {#<style>#}
+                {#/*for ionic*/#}
+                {#@font-face {#}
+                    {#font-family: "Ionicons";#}
+                    {#src: url("{{ asset('newsup-html/fonts/ionicons.eot?v=1.5.2') }}");#}
+                    {#src: url("{{ asset('newsup-html/fonts/ionicons.eot?v=1.5.2#iefix') }}") format("embedded-opentype"),#}
+                    {#url("{{ asset('newsup-html/fonts/ionicons.ttf?v=1.5.2') }}") format("truetype"),#}
+                    {#url("{{ asset('newsup-html/fonts/ionicons.woff?v=1.5.2') }}") format("woff"),#}
+                    {#url("{{ asset('newsup-html/fonts/ionicons.svg?v=1.5.2#Ionicons') }}") format("svg");#}
+                    {#font-weight: normal;#}
+                    {#font-style: normal;#}
+                {#}#}
+            {#</style>#}
+
+            <link rel="stylesheet" href="{{ asset('newsup-html/css/ionicons.min.css') }}"/>
+            {#<link rel="stylesheet" href="{{ asset('newsup-html/css/jquery.fancybox.css') }}"/>#}
+            <link rel="stylesheet" href="{{ asset('newsup-html/css/owl.carousel.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('newsup-html/css/owl.theme.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('newsup-html/css/owl.transitions.css') }}"/>
+            {#<link rel="stylesheet" href="{{ asset('newsup-html/css/rs-wp-v1.2.css') }}"/>#}
+            {#<link rel="stylesheet" href="{{ asset('newsup-html/css/jquery.rs.selectbox.css') }}"/>#}
+            {#<link rel="stylesheet" href="{{ asset('newsup-html/css/responsive.css') }}"/>#}
+            {#<link rel="stylesheet" href="{{ asset('newsup-html/css/stylesheet.css') }}"/>#}
+            <link rel="stylesheet" href="{{ asset('newsup-html/css/css.css') }}"/>
+        {% endblock %}
+        <style>
+            .navbar-brand {
+                width: 190px;
+                height: 46px;
+                margin-top: 5px;
+                text-indent: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                background: url('{{ asset('newsup-html/images/general/logo-red.png') }}') no-repeat;
+                background-size: 100%;
+                padding: 0;
+            }
+            #status {
+                width: 200px;
+                height: 150px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                background-image: url('{{ asset('newsup-html/images/general/status-red.gif') }}');
+                background-repeat: no-repeat;
+                background-position: center;
+                margin: -100px 0 0 -100px;
+            }
+            /* preloading images */
+            .owl-item.loading {
+                min-height: 150px;
+                background: url("{{ asset('newsup-html/images/AjaxLoader.gif') }}") no-repeat center center
+            }
+            /*1-3 GO TO TOP*/
+            #scrollUp {
+                background-color: #e74c3c;
+                background-image: url("{{ asset('newsup-html/images/general/top-red.png') }}");
+                bottom: 20px;
+                right: 20px;
+                width: 38px;    /* Width of image */
+                height: 38px;   /* Height of image */
+            }
+            @font-face {
+                font-family: 'weather';
+                src: url('{{ asset('newsup-html/fonts/artill_clean_icons-webfont.eot') }}');
+                src: url('{{ asset('newsup-html/fonts/artill_clean_icons-webfont.eot?#iefix') }}')
+                format('embedded-opentype'),
+                url('{{ asset('newsup-html/fonts/artill_clean_icons-webfont.woff') }}') format('woff'),
+                url('{{ asset('newsup-html/fonts/artill_clean_icons-webfont.ttf') }}') format('truetype'),
+                url('{{ asset('newsup-html/fonts/artill_clean_icons-webfont.svg#artill_clean_weather_iconsRg')}}') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
+        </style>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <!-- Put this script tag to the <head> of your page -->
+        <script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
+    </head>
+    <body>
+    <script src="{{ asset('newsup-html/js/jquery-1.11.3.js') }}"></script>
+    <script src="{{ asset('newsup-html/js/jquery.dotdotdot.min.js') }}"></script>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+
+            <script src="{{ asset('newsup-html/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('newsup-html/js/jquery.scrollUp.js') }}"></script>
+            <script src="{{ asset('newsup-html/js/jquery.simpleWeather.js') }}"></script>
+            <script src="{{ asset('newsup-html/js/jquery.magnific-popup.js') }}"></script>
+            <script src="{{ asset('newsup-html/js/enquire.js') }}"></script>
+            {#<script src="{{ asset('newsup-html/js/owl.carousel.js') }}"></script>#}
+            <script src="{{ asset('newsup-html/js/jquery.ticker.js') }}"></script>
+            {#<script src="{{ asset('newsup-html/js/bootstrap-tagsinput.js') }}"></script>#}
+            {#<script src="{{ asset('newsup-html/js/jqBootstrapValidation.js') }}"></script>#}
+            {#<script src="{{ asset('newsup-html/js/wow.min.js') }}"></script>#}
+            {#<script src="{{ asset('newsup-html/js/jquery.fancybox.js') }}"></script>#}
+            {#<script src="{{ asset('newsup-html/js/jquery.rs.selectbox.js') }}"></script>#}
+            <script src="{{ asset('newsup-html/js/main.js') }}"></script>
+            {#<script src="{{ asset('newsup-html/js/storage.min.js') }}"></script>#}
+        {% endblock %}
+    </body>
+</html>

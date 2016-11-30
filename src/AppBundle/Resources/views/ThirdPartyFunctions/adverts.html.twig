@@ -1,0 +1,36 @@
+{% extends 'AppBundle::layout_main_page.html.twig' %}
+{% block main_news %}
+    {#<div class="row advert-wrapper">#}
+        {#По вопросам рекламы на портале вы можете обращаться по электронной почте#}
+        {#<div>#}
+            {#{{ contact_email }}#}
+        {#</div>#}
+    {#</div>#}
+
+    <section class="section-advert section-content">
+        <div class="container">
+            <div class="page-icon fa fa-bullhorn"></div>
+            <h1 class="page-title">Ваша реклама на нашем портале</h1>
+            <div class="page-description">
+                <p>Вы можете разместить свою рекламу у нас на сайте.</p>
+                <p>Основное преимущество данного вида рекламы - ваше рекламное объявление точно не будет заблокировано</p>
+                <p>Варианты размещения можете посмотреть ниже:</p>
+            </div>
+            <div class="advert-variants">
+                <div class="advert-variant">
+                    <div class="title">В шапке</div><a href=""><img src="{{ asset('white_design_2/img/rekl-position-variants/header.jpg') }}" alt="Баннер с рекламой в шапке"></a>
+                </div>
+                <div class="advert-variant">
+                    <div class="title">В списке новостей</div><a href="{{ asset('white_design_2/img/rekl-position-variants/news-list.jpg') }}"><img src="{{ asset('white_design_2/img/rekl-position-variants/news-list.jpg') }}" alt="Реклама в списке новостей"></a>
+                </div>
+                <div class="advert-variant">
+                    <div class="title">Над футером</div><a href="{{ asset('white_design_2/img/rekl-position-variants/footer-before.jpg') }}"><img src="{{ asset('white_design_2/img/rekl-position-variants/footer-before.jpg') }}" alt="Реклама над футером"></a>
+                </div>
+                <div class="advert-variant">
+                    <div class="title">Под полной новостью</div><a href="{{ asset('white_design_2/img/rekl-position-variants/fullnew-after.jpg') }}"><img src="{{ asset('white_design_2/img/rekl-position-variants/fullnew-after.jpg') }}" alt="Реклама под полной новостью"></a>
+                </div>
+            </div>
+            <p>Связаться с нами можно через нашу группу Вконтакте или по почте: {{ contact_email }}</p>
+        </div>
+    </section>
+{% endblock %}

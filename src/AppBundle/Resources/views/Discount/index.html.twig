@@ -1,0 +1,62 @@
+{% extends 'AppBundle::layout_preview_pages.html.twig' %}
+
+{% set title = 'Скидки Барнаул. Акции Барнаул' %}
+{% set description = 'Все скидки и акции Барнаула' %}
+{% block meta_information %}
+
+    <!-- Twitter -->
+    <meta content="@{{ twitter_account }}" name="twitter:creator">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{{ description }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@{{ site_url }}">
+    {#{% if news.getImage('main_news_2') %}#}
+        {#<meta name="twitter:image" content="{{ news.getImage('main_news_2').url }}">#}
+        {#<link rel="image_src" href="{{ news.getImage('main_news_2').url }}">#}
+    {#{% endif %}#}
+    <!-- Twitter -->
+
+    <!-- Facebook -->
+    <meta name="og:description" content="{{ description }}">
+    <meta name="og:title" content="{{ title }}">
+    {#<meta property="og:url" content="{{ absolute_url(path('one_news_router', {'gr_news_id': news.getNewsIdFunc })) }}">#}
+
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="450">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="{{ site_url }}">
+    <meta property="og:type" content="website">
+    {#<meta property="og:publisher" content="https://www.facebook.com/www.amic.ru">#}
+    {#{% if news.getImage('main_news_2') %}#}
+        {#<meta name="og:image" content="{{ news.getImage('main_news_2').url }}">#}
+    {#{% endif %}#}
+    <!-- Facebook -->
+
+    {#<meta name="publish_date" content="{{ news.getNewsFormatDate }}">#}
+
+    {#<meta property="url" content="{{ absolute_url(path('one_news_router', {'gr_news_id': news.getNewsIdFunc })) }}">#}
+    {#{% if news.getImage('main_news_2') %}#}
+        {#<meta property="image" content="{{ news.getImage('main_news_2').url }}">#}
+    {#{% endif %}#}
+    <meta property="title" content="{{ title }}">
+{% endblock %}
+
+
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block description_keywords %}
+    <meta name="description" content="{{ description }}">
+{% endblock %}
+
+{% block preview %}
+    <div class="new-cards scroll">
+        {% for news in entities %}
+            {{ include('AppBundle:Subtempates:news_preview.html.twig', {'news': news}) }}
+        {% endfor %}
+        <div class="pagination-wrapper">
+            {{ knp_pagination_render(entities) }}
+        </div>
+    </div>
+{% endblock %}

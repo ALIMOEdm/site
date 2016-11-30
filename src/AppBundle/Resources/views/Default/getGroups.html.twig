@@ -1,0 +1,9 @@
+{% for group in groups %}
+    <label class="group btn {% if selected_groups is defined and group.id in selected_groups %} active {% endif %}">
+        <input type="checkbox" {% if selected_groups is defined and group.id in selected_groups %} checked="checked" {% endif %} autocomplete="off" name="group_filter[]" value="{{ group.id }}" form="search-form">
+        <div class="img" data-role="group-image" data-url="{{ group.logo }}">
+        </div>
+        <div class="title">{{ group.getGroupTitle }}</div>
+        <div class="description">{{ group.description }}</div>
+    </label>
+{% endfor %}

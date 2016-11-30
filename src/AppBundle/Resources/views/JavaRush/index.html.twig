@@ -1,0 +1,51 @@
+{% extends 'AppBundle::layout_main_page.html.twig' %}
+
+{% block meta_information %}
+    <meta name="og:description" content="Этот курс по основам программирования настолько крут,
+что Йельский университет отказался от своего курса и перешел на Harvard CS50">
+    <meta name="og:title" content="Легендарный Гарвардский курс CS50 на русском!">
+    <meta property="og:url" content="dish-alt.ru/java-rush">
+    {% if news.getImage('main_news_2') %}
+        <meta name="og:image" content="http://javarush.ru/images/share/cs50-share.gif">
+    {% endif %}
+{% endblock %}
+{% block main_news %}
+    <style>
+        .main-screen {
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+        body {
+            background: url(http://javarush.ru/images/main.2/notebook-earphones.png) no-repeat left 420px,
+            url(http://javarush.ru/images/main.2/cup-pencils.png) no-repeat right 465px,
+            url(http://javarush.ru/images/main.2/body-top-bg.jpg) no-repeat center -770px;
+            background-size: 237.5px auto,176px auto,auto;
+            background-color: #212124;
+            font-family: latoregular;
+            color: #fff;
+        }
+        h1 {
+            font-family: latolight;
+            font-size: 40px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin: 55px 0 35px;
+        }
+        .container .iframe{
+            width:100%;
+        }
+    </style>
+    {{ html | raw}}
+    <script>
+        $('.dayinfo a.element').css('color', 'white');
+        $('.block.mainmenu ul li a:not([data-type="category_java_rush"]), .block.mainmenu ul li span').css('color', '#DEDEDE');
+        $('main span').css('color', 'white');
+        $(document).ready(function(){
+            $('iframe').each(function(index, elem){
+                $(elem).css('width', $(elem).attr('max-width')+'px');
+                $(elem).css('height', $(elem).attr('max-height')+'px');
+            })
+        });
+    </script>
+{% endblock %}

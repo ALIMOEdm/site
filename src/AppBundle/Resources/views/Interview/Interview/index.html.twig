@@ -1,0 +1,16 @@
+{% extends 'AppBundle::layout_main_page.html.twig' %}
+
+{% block meta_information %}
+    <meta name="og:description" content="Этот курс по основам программирования настолько крут,
+что Йельский университет отказался от своего курса и перешел на Harvard CS50">
+    <meta name="og:title" content="Легендарный Гарвардский курс CS50 на русском!">
+    <meta property="og:url" content="dish-alt.ru/java-rush">
+        <meta name="og:image" content="http://javarush.ru/images/share/cs50-share.gif">
+{% endblock %}
+{% block main_news %}
+    <div>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

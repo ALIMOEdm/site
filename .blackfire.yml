@@ -1,0 +1,6 @@
+tests:
+    "first":
+        path: "/.*"
+        assertions:
+            - main.wall_time < 50ms
+            - main.memory < 2Mb

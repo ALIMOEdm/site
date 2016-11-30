@@ -1,0 +1,656 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: alimoedm
+ * Date: 06.02.2016
+ * Time: 17:43
+ */
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+//@ORM\Table(name="news",
+// *              indexes={
+//    *                  @ORM\Index(name="search_idx", columns={"news_title", "news_description", "news_text_parsed", "news_date_time"}),
+// *                  @ORM\Index(name="search_idx_date", columns={"news_date_time"}),
+// *          }
+// * )
+/**
+ * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\NewsRepository")
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Table(indexes={@ORM\Index(name="date_index", columns={"news_date_time"})})
+ */
+class News {
+
+    private static $link_reg_exp = '/(http(s?):\/\/[^ ]*)/';
+
+    /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="NewsCategory")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    private $category;
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $news_text = '';
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $news_text_origin = '';
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $news_text_parsed = '';
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $news_title = '';
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $news_description = '';
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $news_id = '';
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $news_site_link = '' ;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $news_vk_link = '';
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $news_date = '';
+
+    /**
+     * @ORM\OneToMany(targetEntity="NewsPicture", mappedBy="news")
+     */
+    private $photos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="VKGroup", inversedBy="news")
+     * @ORM\JoinColumn(name="vk_group_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $vk_group;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $news_date_time;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $deleted = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ViewCounter", mappedBy="news")
+     */
+    private $views;
+
+    private $cnt_views = 0;
+
+    public function isDiscount()
+    {
+        if ($this->getCategory()->getIndentity() == 'discount') {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set news_text
+     *
+     * @param string $newsText
+     * @return News
+     */
+    public function setNewsText($newsText)
+    {
+        $this->news_text = $newsText;
+
+        return $this;
+    }
+
+    /**
+     * Get news_text
+     *
+     * @return string 
+     */
+    public function getNewsText()
+    {
+        return $this->news_text;
+    }
+
+    public function getText()
+    {
+        return $this->news_text;
+
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+
+        if(is_null($this->getUpdatedAt())){
+            $this->setUpdatedAt(new \DateTime());
+        }
+    }
+
+    public function getNewsIdFunc(){
+        return abs($this->getVkGroup()->getGroupId()).'_'.$this->getNewsId();
+    }
+
+    /**
+     * Add photo
+     *
+     * @param \AppBundle\Entity\NewsPicture $photo
+     *
+     * @return News
+     */
+    public function addPhoto(\AppBundle\Entity\NewsPicture $photo)
+    {
+        $this->photos[] = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param \AppBundle\Entity\NewsPicture $photo
+     */
+    public function removePhoto(\AppBundle\Entity\NewsPicture $photo)
+    {
+        $this->photos->removeElement($photo);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Set newsId
+     *
+     * @param string $newsId
+     *
+     * @return News
+     */
+    public function setNewsId($newsId)
+    {
+        $this->news_id = $newsId;
+
+        return $this;
+    }
+
+    /**
+     * Get newsId
+     *
+     * @return string
+     */
+    public function getNewsId()
+    {
+        return $this->news_id;
+    }
+
+    /**
+     * Set newsDate
+     *
+     * @param string $newsDate
+     *
+     * @return News
+     */
+    public function setNewsDate($newsDate)
+    {
+        $this->news_date = $newsDate;
+
+        $this->setNewsDateTime(new \DateTime('@'.$newsDate));
+
+        return $this;
+    }
+
+    /**
+     * Get newsDate
+     *
+     * @return string
+     */
+    public function getNewsDate()
+    {
+        return $this->news_date;
+    }
+
+    public function getNewsFormatDate(){
+        setlocale(LC_ALL, 'ru_RU.UTF-8');
+        return strftime('%d %b %Y %H:%M', $this->getNewsDate());
+    }
+
+    /**
+     * Set newsTitle
+     *
+     * @param string $newsTitle
+     *
+     * @return News
+     */
+    public function setNewsTitle($newsTitle)
+    {
+        $this->news_title = $newsTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get newsTitle
+     *
+     * @return string
+     */
+    public function getNewsTitle()
+    {
+        return preg_replace(self::$link_reg_exp, '', $this->news_title);//$this->getSubStr($this->news_title);
+    }
+    public function getNewsTitleOrigin(){
+        return $this->news_title;
+    }
+
+    /**
+     * Set newsDescription
+     *
+     * @param string $newsDescription
+     *
+     * @return News
+     */
+    public function setNewsDescription($newsDescription)
+    {
+        $this->news_description = $newsDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get newsDescription
+     *
+     * @return string
+     */
+    public function getNewsDescription()
+    {
+        return preg_replace(self::$link_reg_exp, '', $this->news_description);
+    }
+
+    /**
+     * Set newsSiteLink
+     *
+     * @param string $newsSiteLink
+     *
+     * @return News
+     */
+    public function setNewsSiteLink($newsSiteLink)
+    {
+        $this->news_site_link = $newsSiteLink;
+
+        return $this;
+    }
+
+    /**
+     * Get newsSiteLink
+     *
+     * @return string
+     */
+    public function getNewsSiteLink()
+    {
+        return urldecode($this->news_site_link);
+    }
+
+    /**
+     * Set newsVkLink
+     *
+     * @param string $newsVkLink
+     *
+     * @return News
+     */
+    public function setNewsVkLink($newsVkLink)
+    {
+        $this->news_vk_link = urldecode($newsVkLink);
+
+        return $this;
+    }
+
+    /**
+     * Get newsVkLink
+     *
+     * @return string
+     */
+    public function getNewsVkLink()
+    {
+        return $this->news_vk_link;
+    }
+
+    /**
+     * Set vkGroup
+     *
+     * @param \AppBundle\Entity\VKGroup $vkGroup
+     *
+     * @return News
+     */
+    public function setVkGroup(\AppBundle\Entity\VKGroup $vkGroup = null)
+    {
+        $this->vk_group = $vkGroup;
+
+        return $this;
+    }
+
+    /**
+     * Get vkGroup
+     *
+     * @return \AppBundle\Entity\VKGroup
+     */
+    public function getVkGroup()
+    {
+        return $this->vk_group;
+    }
+
+    public function getImage($type = ''){
+        if($type == 'main_news'){
+            if(count($this->getPhotos())){
+                foreach($this->getPhotos() as $ph){
+                    if($ph->getSizeInt() >= 5){
+                        return $ph;
+                    }
+                }
+            }
+        }
+        if($type == 'main_news_2'){
+            if(count($this->getPhotos())){
+                foreach($this->getPhotos() as $ph){
+                    if($ph->getSizeInt() >= 3){
+                        return $ph;
+                    }
+                }
+            }
+        }
+        if(count($this->getPhotos())){
+            $max = 0;
+            $max_size = 0;
+            foreach($this->getPhotos() as $i => $ph){
+                if($ph->getSizeInt() >= $max_size){
+                    $max_size = $ph->getSizeInt();
+                    $max = $i;
+                }
+            }
+
+            return $this->getPhotos()[$max];
+        }
+        return null;
+    }
+
+    /**
+     * Set newsTextParsed
+     *
+     * @param string $newsTextParsed
+     *
+     * @return News
+     */
+    public function setNewsTextParsed($newsTextParsed)
+    {
+        $this->news_text_parsed = $newsTextParsed;
+
+        return $this;
+    }
+
+    /**
+     * Get newsTextParsed
+     *
+     * @return string
+     */
+    public function getNewsTextParsed()
+    {
+        return $this->news_text_parsed;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return News
+     *
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return News
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     * @ORM\PreUpdate()
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set newsDateTime
+     *
+     * @param \DateTime $newsDateTime
+     *
+     * @return News
+     */
+    public function setNewsDateTime($newsDateTime)
+    {
+        $this->news_date_time = $newsDateTime;
+
+        return $this;
+    }
+
+    /**
+     * Get newsDateTime
+     *
+     * @return \DateTime
+     */
+    public function getNewsDateTime()
+    {
+        return $this->news_date_time;
+    }
+
+    /**
+     * Set newsTextOrigin
+     *
+     * @param string $newsTextOrigin
+     *
+     * @return News
+     */
+    public function setNewsTextOrigin($newsTextOrigin)
+    {
+        $this->news_text_origin = $newsTextOrigin;
+
+        return $this;
+    }
+
+    /**
+     * Get newsTextOrigin
+     *
+     * @return string
+     */
+    public function getNewsTextOrigin()
+    {
+        return $this->news_text_origin;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return News
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\NewsCategory $category
+     *
+     * @return News
+     */
+    public function setCategory(\AppBundle\Entity\NewsCategory $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\NewsCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Add view
+     *
+     * @param \AppBundle\Entity\ViewCounter $view
+     *
+     * @return News
+     */
+    public function addView(\AppBundle\Entity\ViewCounter $view)
+    {
+        $this->views[] = $view;
+
+        return $this;
+    }
+
+    /**
+     * Remove view
+     *
+     * @param \AppBundle\Entity\ViewCounter $view
+     */
+    public function removeView(\AppBundle\Entity\ViewCounter $view)
+    {
+        $this->views->removeElement($view);
+    }
+
+    /**
+     * Get views
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCntViews()
+    {
+        return $this->cnt_views;
+    }
+
+    /**
+     * @param int $cnt_views
+     */
+    public function setCntViews($cnt_views)
+    {
+        $this->cnt_views = $cnt_views;
+    }
+}

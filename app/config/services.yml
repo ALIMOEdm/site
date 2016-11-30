@@ -1,0 +1,44 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.news_downloader:
+        class:        AppBundle\Services\NewsDownloader
+        arguments:    ['@doctrine.orm.entity_manager']
+    app.currency_rate:
+        class:        AppBundle\Services\ThirdPartyServices\CurrencyRate
+        arguments:    ['@doctrine.orm.entity_manager']
+    app.receive_weather:
+        class:        AppBundle\Services\ThirdPartyServices\ReceiveWeather
+        arguments:    ['@doctrine.orm.entity_manager']
+    app.celebrate:
+        class:        AppBundle\Services\ThirdPartyServices\Celebrate
+        arguments:    ['@doctrine.orm.entity_manager']
+    app.popular_news:
+        class:        AppBundle\Services\ThirdPartyServices\PopularNews
+        arguments:    ['@doctrine.orm.entity_manager']
+    app.remove_wrong_news:
+        class: AppBundle\Services\RemoveWrongNews
+        arguments: ['@service_container']
+
+    app.third_party_info:
+        class: AppBundle\Services\ThirdPartyServices\ThirdPartyInformation
+        arguments: ['@service_container']
+
+    app.multi_curl:
+        class: AppBundle\Services\MultiCurl\MultiCurlWrapper
+
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    app.traffic_manager:
+        class: AppBundle\Services\Traffic\TrafficManager
+        arguments:    ['@doctrine.orm.entity_manager', '@app.multi_curl']

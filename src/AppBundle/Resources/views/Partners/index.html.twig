@@ -1,0 +1,36 @@
+{% extends 'AppBundle::layout_main_page.html.twig' %}
+{% block main_news %}
+    <section class="section-partners section-content">
+        <div class="container">
+            <div class="page-icon fa fa-users"></div>
+            <h1 class="page-title">Наши партнеры</h1>
+            <div class="page-description">
+                <p>Огромное <span>спасибо</span> нашим партнерам за предоставленную информацию</p>
+            </div>
+            <div class="partners">
+                {% for partner in partners %}
+                    <div class="partner">
+                        <div class="img" style="height: 200px;
+overflow: hidden;
+width: 200px; margin: 0 auto;"><img src="{{ partner.logo }}"></div>
+                        <div class="title" style="text-align: center"><a href="{{ partner.getGroupUrl }}" target="_blank">{{ partner.getGroupTitle }}</a></div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <p>Внешние партнеры</p>
+
+            <ul>
+                <li>
+                    <a href='http://y-lady.ru/category/zdorove-i-diety/diety-i-pravilnoe-pitanie' title='Диеты и питание'>Диеты и питание</a>
+                </li>
+                <li>
+                    <a href="http://sites.yamaker.ru/" target="_blank" id="wt_catalog"><img src="http://rs.yamaker.ru/Sites/img/partner.jpg" alt="" title="" height="60px"></a>
+                </li>
+                <li>
+                    <a href="http://www.admir-moskva.ru/" title="Адмир - Бесплатные объявления Москвы" target="_blank"><img src="http://www.admir-moskva.ru/content/banners/admirBotton.gif" border="0" alt="Адмир - Бесплатные объявления Москвы" /></a>
+                </li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
