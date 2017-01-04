@@ -79,3 +79,111 @@
 .section-news .new-cards .mCSB_inside > .mCSB_container{
     margin-right: 0;
 }
+
+.section-banner {
+    padding: 20px 0 !important
+}
+
+.section-banner .banner {
+    position: relative;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    background: url(../img/vape-baner/banner-bg.jpg) top center;
+    background-size: cover
+}
+
+.section-banner .banner .menu, .section-banner .banner .title {
+    margin-bottom: 20px
+}
+
+.section-banner .banner .description {
+    margin-bottom: 20px;
+    font-weight: 300
+}
+
+.section-banner .banner .vk {
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    text-align: right
+}
+
+.section-banner .banner .vk a {
+    color: #fff;
+    font-size: 14px
+}
+
+.section-banner .banner .vk a span:not(.icon) {
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    -webkit-transition: border .3s;
+    transition: border .3s
+}
+
+.section-banner .banner .vk a:hover span:not(.icon) {
+    border-bottom-color: #fff
+}
+
+.section-banner .banner .btn {
+    display: inline-block;
+    min-width: 200px;
+    position: relative;
+    outline: 0;
+    overflow: hidden;
+    padding: 10px 25px 15px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: none;
+    background-image: -webkit-gradient(linear, 140deg, from(#e51717), to(#c0c));
+    background-image: -webkit-linear-gradient(140deg, #e51717, #c0c);
+    background-image: linear-gradient(to 140deg, #e51717, #c0c);
+    color: #fff;
+    z-index: 1;
+    cursor: pointer;
+    -webkit-transition: .5s;
+    transition: .5s
+}
+
+.section-banner .banner .btn:after, .section-banner .banner .btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0
+}
+
+.section-banner .banner .btn:before {
+    z-index: 3;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border-bottom: 5px solid rgba(0, 0, 0, .2)
+}
+
+.section-banner .banner .btn:after {
+    display: block;
+    background-image: -webkit-gradient(linear, 140deg, from(#c0c), to(#e51717));
+    background-image: -webkit-linear-gradient(140deg, #c0c, #e51717);
+    background-image: linear-gradient(to 140deg, #c0c, #e51717);
+    z-index: 2;
+    opacity: 0;
+    -webkit-transition: .5s;
+    transition: .5s
+}
+
+.section-banner .banner .btn:hover:after {
+    opacity: 1
+}
+
+.section-banner .banner .btn span {
+    position: relative;
+    z-index: 10
+}
+@media only screen and (max-width: 992px) {
+
+    .section-banner .banner .vk {
+        position: static;
+        text-align: center
+    }
+}
