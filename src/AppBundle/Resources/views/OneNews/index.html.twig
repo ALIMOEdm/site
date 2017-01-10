@@ -34,7 +34,8 @@
     <!-- Facebook -->
 
     <meta name="publish_date" content="{{ news.getNewsFormatDate }}">
-
+    <meta property="title" content="{{ title }}">
+    <meta property="description" content="{{ description }}">
     <meta property="url" content="{{ absolute_url(path('one_news_router', {'gr_news_id': news.getNewsIdFunc })) }}">
     {% if news.getImage('main_news_2') %}
         <meta property="image" content="{{ news.getImage('main_news_2').url }}">
@@ -62,21 +63,23 @@
     {% endif %}
 <section class="section-full-new">
     <div class="container">
-        <div class="new-card new-card-full">
+        <div class="new-card new-card-full" itemscope>
         {% if  news.getImage('main_news_2') %}
             <div class="new-card-full-image"
+                 itemprop="image"
                  data-role="news-image"
                  data-url="{{ news.getImage('main_news_2').url }}
                  "></div>
         {% else %}
             <div class="new-card-full-image"
                  data-role="news-image"
+                 itemprop="image"
                  data-url="{{ asset('/white_design_2/img/images/default.jpg') }}"
                     ></div>
         {% endif %}
             <div class="content">
-                <h1 class="title">{{ title }}</h1>
-                <div class="description">
+                <h1 class="title" itemprop="title">{{ title }}</h1>
+                <div class="description" itemprop="news_text">
                     <p class="one-news-main-content" data-text="{{ text }}" data-id="{{ news.id }}">
                         <script>
                             var el = document.querySelector("[data-id='{{ news.id }}']");
@@ -113,16 +116,16 @@
                 <div class="row">
                     <div class="col-xs-8 text-xs-left">
                         <div class="publication-date element">
-                            <div class="fa fa-clock-o"></div><a href="#" title="Отфильтровать новости по дате" class="btn btn-link"><span>{{ news.getNewsFormatDate }}</span></a>
+                            <div class="fa fa-clock-o"></div><a href="#" title="Отфильтровать новости по дате" class="btn btn-link"><span itemprop="date_create">{{ news.getNewsFormatDate }}</span></a>
                         </div>
                         <div class="divider element"></div>
                         <div class="source element">
-                            <div class="fa fa-newspaper-o"></div><a href="#" title="Отфильтровать новости по группе" class="btn btn-link">{{ news.getVkGroup.getGroupTitle }}</a>
+                            <div class="fa fa-newspaper-o"></div><a href="#" title="Отфильтровать новости по группе" class="btn btn-link" itemprop="source_group">{{ news.getVkGroup.getGroupTitle }}</a>
                         </div>
                     </div>
                     <div class="col-xs-4 text-xs-right">
                         <div class="views element">
-                            <div class="fa fa-eye"></div><span>{{ news.getCntViews }}</span>
+                            <div class="fa fa-eye"></div><span itemprop="count_of_views">{{ news.getCntViews }}</span>
                         </div>
                         {#<div class="divider element"></div>#}
                         {#<div class="comments element">#}
