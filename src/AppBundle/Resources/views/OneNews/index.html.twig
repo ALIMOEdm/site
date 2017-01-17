@@ -136,6 +136,26 @@
             </div>
             <div class="footer">
                 <div class="row">
+                    <div class="col-xs-4 text-xs-left">
+                        <!-- Put this div tag to the place, where the Like block will be -->
+                        <div id="vk_like"></div>
+                        <script type="text/javascript">
+                            VK.Widgets.Like("vk_like", {type: "mini"});
+                        </script>
+                    </div>
+                    <div class="col-xs-4 text-xs-left">
+                        <div id="vk_subscribe"></div>
+                        <script type="text/javascript">
+                            VK.Widgets.Subscribe("vk_subscribe", {}, -97802864);
+                        </script>
+                    </div>
+                    <div class="col-xs-4 text-xs-left">
+                        <script type="text/javascript"><!--
+                            document.write(VK.Share.button(false,{type: "round_nocount", text: "Сохранить"}));
+                            --></script>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-8 text-xs-left">
                         <div class="publication-date element">
                             <div class="fa fa-clock-o"></div><a href="#" title="Отфильтровать новости по дате" class="btn btn-link"><span itemprop="date_create">{{ news.getNewsFormatDate }}</span></a>
@@ -154,6 +174,13 @@
                             {#<div class="fa fa-comment-o"></div><span>8</span>#}
                         {#</div>#}
                     </div>
+                </div>
+
+                <div class="row">
+                    <div id="vk_comments"></div>
+                    <script type="text/javascript">
+                        VK.Widgets.Comments("vk_comments", {limit: 10, width: "665", attach: "*"});
+                    </script>
                 </div>
             </div>
 
