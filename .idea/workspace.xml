@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ecdc6639-de70-4084-87b9-22c2c1d8012d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Resources/views/OneNews/index.html.twig" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/views/OneNews/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/white_design_2/css/custom.css" afterPath="$PROJECT_DIR$/web/white_design_2/css/custom.css" />
     </list>
     <ignored path="news_site.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/OneNews/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52" vertical-offset="2577" max-vertical-offset="3546">
-              <caret line="154" column="34" selection-start-line="154" selection-start-column="34" selection-end-line="154" selection-end-column="34" />
+            <state vertical-scroll-proportion="-5.224138" vertical-offset="2991" max-vertical-offset="3546">
+              <caret line="183" column="29" selection-start-line="183" selection-start-column="29" selection-end-line="183" selection-end-column="29" />
               <folding>
                 <element signature="e#7004#7034#0#HTML" expanded="true" />
                 <element signature="e#8083#8108#0#HTML" expanded="true" />
@@ -120,6 +120,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="custom.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/white_design_2/css/custom.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9192825" vertical-offset="3280" max-vertical-offset="3816">
+              <caret line="205" column="29" selection-start-line="205" selection-start-column="29" selection-end-line="205" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -133,7 +143,6 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/Subtempates/news_preview.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/layout_main_page.html.twig" />
-        <option value="$PROJECT_DIR$/web/white_design_2/css/custom.css" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Services/SiteMap.php" />
         <option value="$PROJECT_DIR$/web/sitemap.xml" />
@@ -143,6 +152,7 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Services/NewsDownloader.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/OneNews/index.html.twig" />
+        <option value="$PROJECT_DIR$/web/white_design_2/css/custom.css" />
       </list>
     </option>
   </component>
@@ -1062,14 +1072,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/white_design_2/css/custom.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3159" max-vertical-offset="3636">
-          <caret line="191" column="4" selection-start-line="191" selection-start-column="4" selection-end-line="191" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/CategoryNews/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="498">
@@ -1184,12 +1186,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/OneNews/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52" vertical-offset="2577" max-vertical-offset="3546">
-          <caret line="154" column="34" selection-start-line="154" selection-start-column="34" selection-end-line="154" selection-end-column="34" />
+        <state vertical-scroll-proportion="-5.224138" vertical-offset="2991" max-vertical-offset="3546">
+          <caret line="183" column="29" selection-start-line="183" selection-start-column="29" selection-end-line="183" selection-end-column="29" />
           <folding>
             <element signature="e#7004#7034#0#HTML" expanded="true" />
             <element signature="e#8083#8108#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/white_design_2/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9192825" vertical-offset="3280" max-vertical-offset="3816">
+          <caret line="205" column="29" selection-start-line="205" selection-start-column="29" selection-end-line="205" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
