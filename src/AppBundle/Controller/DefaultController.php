@@ -31,7 +31,6 @@ class DefaultController extends Controller
      */
     public function testAction($offset = 0)
     {
-
 //        $ch = curl_init('http://amp.gs/8u9i');
 //        curl_exec($ch);
 //        $info = curl_getinfo($ch);
@@ -55,7 +54,7 @@ class DefaultController extends Controller
 //        }
 
 //        $this->get('app.traffic_manager')->refreshData();
-        $this->get('app.site_map')->addToSiteMap('test');
+//        $this->get('app.site_map')->addToSiteMap('test');
         return array('result' => 'OK');
     }
 

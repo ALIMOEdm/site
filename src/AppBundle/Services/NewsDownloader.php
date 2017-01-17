@@ -594,7 +594,7 @@ class NewsDownloader
             $this->em->flush();
 
             // Refresh siteMap
-            $url = $this->router->generate('one_news_router', ['gr_news_id'=> $news->getNewsIdFunc()], UrlGeneratorInterface::ABSOLUTE_PATH);
+            $url = $this->router->generate('one_news_router', ['gr_news_id'=> $news->getNewsIdFunc()], UrlGeneratorInterface::ABSOLUTE_URL);
             $this->site_map->addToSiteMap($url);
 
             return true;
