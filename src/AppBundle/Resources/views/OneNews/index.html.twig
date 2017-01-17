@@ -3,6 +3,11 @@
 {% set description = '' %}
 {% set title = news.getNewsTitle %}
 {% set description = news.getNewsDescription %}
+
+{% block canonnical_url %}
+    <link rel="canonical" href="{{ absolute_url(path('one_news_router', {'gr_news_id': news.getNewsIdFunc })) }}" itemprop="url">
+{% endblock canonnical_url %}
+
 {% block meta_information %}
 
     <!-- Twitter -->
@@ -44,6 +49,23 @@
 {% endblock %}
 
 
+{% block news_information %}
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "headline": "{{ title }}",
+      "image": "{{ news.getImage('main_news_2') }}",
+    "keywords": [],
+      "datePublished": "{{ news.getNewsFormatDate }}",
+      "articleSection": "news",
+      "creator": "DishAlt",
+      "author": "{{ news.getVkGroup.getGroupTitle }}",
+      "articleBody": "{{ description }}",
+      "mainEntityOfPage": "True"
+    }
+    </script>
+{% endblock news_information%}
 
 {% block title %}
     {{ title }}

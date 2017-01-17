@@ -9,7 +9,7 @@ services:
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     app.news_downloader:
         class:        AppBundle\Services\NewsDownloader
-        arguments:    ['@doctrine.orm.entity_manager']
+        arguments:    ['@doctrine.orm.entity_manager', '@app.site_map', '@router']
     app.currency_rate:
         class:        AppBundle\Services\ThirdPartyServices\CurrencyRate
         arguments:    ['@doctrine.orm.entity_manager']
@@ -41,4 +41,8 @@ services:
 
     app.traffic_manager:
         class: AppBundle\Services\Traffic\TrafficManager
-        arguments:    ['@doctrine.orm.entity_manager', '@app.multi_curl']
+        arguments:  ['@doctrine.orm.entity_manager', '@app.multi_curl']
+
+    app.site_map:
+        class: AppBundle\Services\SiteMap
+        arguments: ["%site_map_path%"]

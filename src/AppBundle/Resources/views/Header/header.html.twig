@@ -71,22 +71,37 @@
                     </form>
                 </div>
                 <div class="menu">
-                    <ul>
-                        <li><a href="{{ path('homepage') }}"
-                                    {% if category_news is defined %}
-                                        class="active"
-                                    {% endif %}
-                                    >Новости</a></li>
-                        <li><a href="{{ path('discounts_index') }}" class=""
-                                    {% if category_discount is defined %}
-                                        class="active"
-                                    {% endif %}
-                                    >Акции и скидки</a></li>
-                        <li><a href="{{ path('job_searcher_index') }}" class=""
-                                    {% if category_job_seacher is defined %}
-                                        class="active"
-                                    {% endif %}
-                                    >Поиск работы</a></li>
+                    <ul itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+                        <li itemprop="Новости" keywords="Новости, Новости Барнаул, Новости края, Амик, Алтапресс">
+                            <a href="{{ path('homepage') }}"
+                                {% if category_news is defined %}
+                                    class="active"
+                                {% endif %}
+                               itemprop="url"
+                                >
+                                Новости
+                            </a>
+                        </li>
+                        <li itemprop="Акции и скидки" keywords="Акции, Акции Барнаул, Скидки Барнаул">
+                            <a href="{{ path('discounts_index') }}" class=""
+                                {% if category_discount is defined %}
+                                    class="active"
+                                {% endif %}
+                               itemprop="url"
+                                >
+                                Акции и скидки
+                            </a>
+                        </li>
+                        <li itemprop="Поиск работы" keywords="Поиск работы, Работа Барнаул">
+                            <a href="{{ path('job_searcher_index') }}" class=""
+                                {% if category_job_seacher is defined %}
+                                    class="active"
+                                {% endif %}
+                               itemprop="url"
+                                >
+                                Поиск работы
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 {#<div class="often-searches hidden">#}
