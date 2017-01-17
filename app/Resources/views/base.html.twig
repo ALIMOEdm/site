@@ -10,7 +10,7 @@
     </title>
 
     {% block canonnical_url %}
-    <link rel="canonical" href="https://example.com/" itemprop="url">
+    <link rel="canonical" href="http://dish-alt.ru">
     {% endblock canonnical_url %}
 
     <meta name="author" content="DishAlt" />
@@ -33,6 +33,7 @@
         <meta property="description" content="Новости Барнаула и Алтайского края. Самая актуальная информация. Скидки в Барнауле">
         <meta property="url" content="{{ rss_link }}">
 
+        <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ rss_link }}" />
         <meta property="og:description" content="Новости Барнаула и Алтайского края. Самая актуальная информация. Скидки в Барнауле">
         <meta property="og:title" content="Новости Барнаула и Алтайского края">
@@ -65,9 +66,7 @@
       "@type": "Organization",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Барнаул, Россия",
-        "postalCode": "",
-        "streetAddress": ""
+        "addressLocality": "Барнаул, Россия"
       },
       "email": "neradivx.mike@yandex.ru",
       "name": "DishAlt"
