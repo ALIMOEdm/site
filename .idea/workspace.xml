@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ecdc6639-de70-4084-87b9-22c2c1d8012d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/white_design_2/css/custom.css" afterPath="$PROJECT_DIR$/web/white_design_2/css/custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Resources/views/layout_main_page.html.twig" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/views/layout_main_page.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="news_site.iws" />
@@ -676,7 +674,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../localhost" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../work_progects/purple_wifi" />
     <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
