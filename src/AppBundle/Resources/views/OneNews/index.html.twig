@@ -3,6 +3,11 @@
 {% set description = '' %}
 {% set title = news.getNewsTitle %}
 {% set description = news.getNewsDescription %}
+
+{% block canonnical_url %}
+    <link rel="canonical" href="{{ absolute_url(path('one_news_router', {'gr_news_id': news.getNewsIdFunc })) }}" itemprop="url">
+{% endblock canonnical_url %}
+
 {% block meta_information %}
 
     <!-- Twitter -->
@@ -21,6 +26,7 @@
     <meta name="og:description" content="{{ description }}">
     <meta name="og:title" content="{{ title }}">
     <meta property="og:url" content="{{ absolute_url(path('one_news_router', {'gr_news_id': news.getNewsIdFunc })) }}">
+    <meta property="og:type" content="website" />
 
     <meta property="og:image:width" content="800">
     <meta property="og:image:height" content="450">
@@ -43,7 +49,23 @@
     <meta property="title" content="{{ title }}">
 {% endblock %}
 
-
+{% block news_information %}
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "headline": "{{ title }}",
+      "image": "",
+    "keywords": [],
+      "datePublished": "{{ news.getNewsFormatDate }}",
+      "articleSection": "news",
+      "creator": "DishAlt",
+      "author": "{{ news.getVkGroup.getGroupTitle }}",
+      "articleBody": "{{ description }}",
+      "mainEntityOfPage": "True"
+    }
+    </script>
+{% endblock news_information%}
 
 {% block title %}
     {{ title }}
@@ -132,6 +154,34 @@
                             {#<div class="fa fa-comment-o"></div><span>8</span>#}
                         {#</div>#}
                     </div>
+                </div>
+
+                <div class="row" style="padding: 50px 0 10px 0">
+                    <div class="col-xs-2 text-xs-left">
+                        <!-- Put this div tag to the place, where the Like block will be -->
+                        <div id="vk_like"></div>
+                        <script type="text/javascript">
+                            VK.Widgets.Like("vk_like", {type: "mini"});
+                        </script>
+                    </div>
+                    <div class="col-xs-8 text-xs-left">
+                        <div id="vk_subscribe"></div>
+                        <script type="text/javascript">
+                            VK.Widgets.Subscribe("vk_subscribe", {}, -97802864);
+                        </script>
+                    </div>
+                    <div class="col-xs-2 text-xs-left">
+                        <script type="text/javascript"><!--
+                            document.write(VK.Share.button(false,{type: "round_nocount", text: "Сохранить"}));
+                            --></script>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="vk_comments"></div>
+                    <script type="text/javascript">
+                        VK.Widgets.Comments("vk_comments", {limit: 10, width: "665", attach: "*"});
+                    </script>
                 </div>
             </div>
 

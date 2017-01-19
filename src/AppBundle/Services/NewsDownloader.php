@@ -32,18 +32,25 @@ use AppBundle\Util\TwitterStatist;
 use AppBundle\Util\VkRequests;
 use AppBundle\Util\VKStatistic;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class NewsDownloader
  * @package AppBundle\Services
  */
-class NewsDownloader {
+class NewsDownloader
+{
 
     protected $cache_img_size_by_url;
     public $em;
     public $group;
-    public function __construct(EntityManager $entityManager){
+    protected $site_map;
+    protected $router;
+    public function __construct(EntityManager $entityManager, SiteMap $site_map, $router)
+    {
         $this->em = $entityManager;
+        $this->site_map = $site_map;
+        $this->router = $router;
     }
 
     public function getNews($group_id, $count, $offset){
@@ -585,6 +592,11 @@ class NewsDownloader {
                 $this->em->persist($discountNews);
             }
             $this->em->flush();
+
+            // Refresh siteMap
+            $url = $this->router->generate('one_news_router', ['gr_news_id'=> $news->getNewsIdFunc()], UrlGeneratorInterface::ABSOLUTE_URL);
+            $this->site_map->addToSiteMap($url);
+
             return true;
         }
         return false;

@@ -18,6 +18,8 @@ parameters:
     vk_group: "https://vk.com/barneo_news"
     twitter_acc: "dish_alt"
     date_filter_format: "d.m.Y"
+    site_map_path: "%kernel.root_dir%/../web/sitemap.xml"
+
 
 # Twig Configuration
 twig:

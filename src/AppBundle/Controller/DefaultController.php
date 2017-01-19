@@ -31,7 +31,6 @@ class DefaultController extends Controller
      */
     public function testAction($offset = 0)
     {
-
 //        $ch = curl_init('http://amp.gs/8u9i');
 //        curl_exec($ch);
 //        $info = curl_getinfo($ch);
@@ -39,7 +38,7 @@ class DefaultController extends Controller
 //
 //
 //        die;
-        header('Content-Type: text/html; charset=utf-8');
+//        header('Content-Type: text/html; charset=utf-8');
         $group = '-71731022';//amic
 //        $group = '-20351570';//altapress
 //        $group = '-56877418';//alt_brn_news
@@ -54,7 +53,8 @@ class DefaultController extends Controller
 //            return array('result' => $e->getMessage());
 //        }
 
-        $this->get('app.traffic_manager')->refreshData();
+//        $this->get('app.traffic_manager')->refreshData();
+//        $this->get('app.site_map')->addToSiteMap('test');
         return array('result' => 'OK');
     }
 

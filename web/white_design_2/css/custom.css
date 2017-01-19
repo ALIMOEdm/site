@@ -194,3 +194,14 @@
          width: 100%;
      }
 }
+
+
+#vk_comments {
+    width: 100% !important;
+    height: 270px !important;
+    padding: 15px !important;
+}
+#vk_comments iframe {
+    width: 100% !important;
+    height: 270px !important;
+}
