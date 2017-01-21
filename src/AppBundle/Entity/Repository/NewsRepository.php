@@ -289,9 +289,8 @@ class NewsRepository extends EntityRepository
         if (!$date_start && !$query) {
             $date_start_def = new \DateTime();
             $date_start_def->sub(new \DateInterval('P2D'));
-//            $qb
-//                ->andWhere('n.news_date_time>:date_start_default')
-//                ->setParameter(':date_start_default', $date_start_def);
+            $qb ->andWhere('n.news_date_time>:date_start_default')
+                ->setParameter(':date_start_default', $date_start_def);
         }
 
         return $qb->getQuery();
@@ -309,7 +308,7 @@ class NewsRepository extends EntityRepository
     public function getNewsWithoutSlug($limit, $offset)
     {
         $qb = $this->createQueryBuilder('n')
-            ->where('n.slug=\'\'')
+            ->where('n.slug=\'\' OR n.slug IS NULL')
             ->orderBy('n.createdAt', 'DESC')
             ->setMaxResults($limit)
         ->setFirstResult($offset);

@@ -19,7 +19,7 @@ class CreateSlugCommand  extends ContainerAwareCommand{
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $limit = 20;
+        $limit = 1;
         $offset = 0;
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $translator = $this->getContainer()->get('app.transliterator');
@@ -36,6 +36,8 @@ class CreateSlugCommand  extends ContainerAwareCommand{
                 break;
             }
             $offset += count($news);
+
+            var_dump($offset);
         }
 
         $output->writeln('done');
