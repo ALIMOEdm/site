@@ -111,6 +111,11 @@ class News {
     private $news_date_time;
 
     /**
+     * @ORM\Column(type="string", nullable=false)
+     */
+    private $slug;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $deleted = 0;

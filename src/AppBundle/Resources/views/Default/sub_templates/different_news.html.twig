@@ -1,6 +1,6 @@
 <div class="block hotnew">
     <div class="hotnew_content">
-        <a href="{{ path('one_news_router', {'gr_news_id': news.getNewsIdFunc }) }}" class="hotnew_title fullarticle-link js-main-news-description">
+        <a href="{{ path('one_news_router_slug', {'slug': news.getSlug }) }}" class="hotnew_title fullarticle-link js-main-news-description">
             {% set text ='' %}
             {% if news.getNewsTitle %}
                 {% set text = news.getNewsTitle %}

@@ -1,11 +1,13 @@
 {% extends 'AppBundle::layout_main_page.html.twig' %}
+
+
 {% set title = '' %}
 {% set description = '' %}
 {% set title = news.getNewsTitle %}
 {% set description = news.getNewsDescription %}
 
 {% block canonnical_url %}
-    <link rel="canonical" href="{{ absolute_url(path('one_news_router', {'gr_news_id': news.getNewsIdFunc })) }}" itemprop="url">
+    <link rel="canonical" href="{{ absolute_url(path('one_news_router_slug', {'slug': news.getSlug })) }}" itemprop="url">
 {% endblock canonnical_url %}
 
 {% block meta_information %}
@@ -25,7 +27,7 @@
     <!-- Facebook -->
     <meta name="og:description" content="{{ description }}">
     <meta name="og:title" content="{{ title }}">
-    <meta property="og:url" content="{{ absolute_url(path('one_news_router', {'gr_news_id': news.getNewsIdFunc })) }}">
+    <meta property="og:url" content="{{ absolute_url(path('one_news_router_slug', {'slug': news.getSlug })) }}">
     <meta property="og:type" content="website" />
 
     <meta property="og:image:width" content="800">
@@ -42,7 +44,7 @@
     <meta name="publish_date" content="{{ news.getNewsFormatDate }}">
     <meta property="title" content="{{ title }}">
     <meta property="description" content="{{ description }}">
-    <meta property="url" content="{{ absolute_url(path('one_news_router', {'gr_news_id': news.getNewsIdFunc })) }}">
+    <meta property="url" content="{{ absolute_url(path('one_news_router_slug', {'slug': news.getSlug })) }}">
     {% if news.getImage('main_news_2') %}
         <meta property="image" content="{{ news.getImage('main_news_2').url }}">
     {% endif %}
@@ -156,6 +158,11 @@
                     </div>
                 </div>
 
+                <script type="text/javascript" src="https://vk.com/js/api/share.js?94" charset="windows-1251"></script>
+                <script type="text/javascript" src="https://vk.com/js/api/openapi.js?137"></script>
+                <script type="text/javascript">
+                    VK.init({apiId: 5554759, onlyWidgets: true});
+                </script>
                 <div class="row" style="padding: 50px 0 10px 0">
                     <div class="col-xs-2 text-xs-left">
                         <!-- Put this div tag to the place, where the Like block will be -->

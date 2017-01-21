@@ -22,7 +22,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\NewsRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(indexes={@ORM\Index(name="date_index", columns={"news_date_time"})})
+ * @ORM\Table(indexes={@ORM\Index(name="date_index", columns={"news_date_time"}),
+ *                     @ORM\Index(name="slug_index", columns={"slug"}),
+ *                      @ORM\Index(name="news_id_index", columns={"news_id"}),
+ *
+ * })
  */
 class News {
 
@@ -109,6 +113,11 @@ class News {
      * @ORM\Column(type="datetime")
      */
     private $news_date_time;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="boolean")
@@ -652,5 +661,34 @@ class News {
     public function setCntViews($cnt_views)
     {
         $this->cnt_views = $cnt_views;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return News
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function getStrForSlug()
+    {
+        return $this->getNewsTitle().($this->getVkGroup()->getGroupId()).'-'.$this->getNewsId();
     }
 }

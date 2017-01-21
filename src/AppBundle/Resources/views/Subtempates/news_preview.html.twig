@@ -1,5 +1,5 @@
 <div class="new-card" itemscope>
-    <a href="{{ path('one_news_router', {'gr_news_id': news.getNewsIdFunc }) }}">
+    <a href="{{ path('one_news_router_slug', {'slug': news.getSlug }) }}">
         {% if  news.getImage('main_news_2') %}
 
             <div itemprop="image" class="new-card-preview-image" data-role="news-image" data-url="{{ news.getImage('main_news_2').url }}"></div>
@@ -8,7 +8,7 @@
         {% endif %}
     </a>
 
-    <a href="{{ path('one_news_router', {'gr_news_id': news.getNewsIdFunc }) }}">
+    <a href="{{ path('one_news_router_slug', {'slug': news.getSlug }) }}">
         {% if news.getNewsTitle %}
             <div class="title" itemprop="title">
                 {{ news.getNewsTitle }}

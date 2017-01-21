@@ -19,7 +19,7 @@
                     {{ n.getNewsDescription | filterXMLForYandex }}
                 </description>
                 <link>
-                    {{ url('one_news_router', {'gr_news_id': n.getNewsIdFunc }) | filterXMLForYandex }}
+                    {{ url('one_news_router_slug', {'slug': n.getSlug }) | filterXMLForYandex }}
                 </link>
                 <pubDate>
                     {{ n.getCreatedAt.format(rss_date_format) }}
@@ -28,7 +28,7 @@
                     {{ n.getNewsTextParsed | filterXMLForYandex }}
                 </yandex:full-text>
                 <pdalink>
-                    {{ url('one_news_router', {'gr_news_id': n.getNewsIdFunc }) }}
+                    {{ url('one_news_router_slug', {'slug': n.getSlug }) }}
                 </pdalink>
 
                 <yandex:genre>message</yandex:genre>
@@ -36,7 +36,7 @@
                 {#<category>Технологии</category>#}
 
                 <guid>
-                    {{ url('one_news_router', {'gr_news_id': n.getNewsIdFunc }) }}
+                    {{ url('one_news_router_slug', {'slug': n.getSlug }) }}
                 </guid>
                 {#<media:thumbnail url='{{ n.getImage('main_news_2').url }}' />#}
                 <enclosure url='{{ n.getImage('main_news_2').url }}' length="{{ n.getImage('main_news_2').url|imgSize }}"

@@ -6,7 +6,7 @@
             <div class="carousel-3 owl-carousel owl-theme">
                 {% for n in news %}
                     <div class="new-card hot-new">
-                        <a href="{{ path('one_news_router', {'gr_news_id': n.getNewsIdFunc }) }}">
+                        <a href="{{ path('one_news_router_slug', {'slug': n.getSlug }) }}">
                             {% if n.getNewsTitle %}
                                 <div class="title dotdotdot">
                                     {{ n.getNewsTitle }}

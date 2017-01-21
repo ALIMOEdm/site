@@ -41,16 +41,48 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class NewsDownloader
 {
 
+    /**
+     * @var
+     */
     protected $cache_img_size_by_url;
+
+    /**
+     * @var EntityManager
+     */
     public $em;
+
+    /**
+     * @var
+     */
     public $group;
+
+    /**
+     * @var SiteMap
+     */
     protected $site_map;
+
+    /**
+     * @var
+     */
     protected $router;
-    public function __construct(EntityManager $entityManager, SiteMap $site_map, $router)
+
+    /**
+     * @var Transliterator
+     */
+    protected $translator;
+
+    /**
+     * @param EntityManager $entityManager
+     * @param SiteMap $site_map
+     * @param $router
+     * @param Transliterator $translator
+     */
+    public function __construct(EntityManager $entityManager, SiteMap $site_map, $router, Transliterator $translator)
     {
         $this->em = $entityManager;
         $this->site_map = $site_map;
         $this->router = $router;
+        $this->translator = $translator;
     }
 
     public function getNews($group_id, $count, $offset){
@@ -109,242 +141,6 @@ class NewsDownloader
 
         mb_regex_encoding("UTF-8");
         mb_internal_encoding("UTF-8");
-        if ($this->group->getGroupId() == -113535804 || $this->group->getGroupId() == -117465274) {
-            if (mb_ereg_match('.*Новые акции в приложении.*', $post_text)) {
-                return false;
-            }
-            $is_discount = true;
-//            $post_text = "✔BELWEST возвращает 100% на бонусную карту
-//В период с 14 августа до 21 сентября 2016 г. в сети BELWEST проходит рекламная акция «BELWEST возвращает 100% стоимости покупки на Вашу бонусную карту»:
-//При совершении покупки обуви или сумок на белых ценниках 100% суммы покупки по чеку зачисляются на счет бонусной карты (1 рубль = 1 акционный балл).
-//Подробности акции в приложении и в магазинах BELWEST!
-//
-//📱Отслеживай актуальные скидки, акции и мероприятия Барнаула!
-//Скачать приложение: https://play.google.com/store/apps/details?id=com.dwd..
-//#TopDiscount #topdiscount #топдисконт #topdis #TD #скидкибарнаул #распродажа #барнаул #barnaul";
-
-//            $post_text = '✔1 октября - ДЕНЬ ШОПИНГА в ТРЦ "ОГНИ"!
-//Только в этот день с 10:00 до 21:00 все отделы торгового центра предоставят максимальные скидки и специальные предложения любимым покупателям!
-//На парковке ТРЦ "ОГНИ" состоится праздничный концерт; показ моделей одежды, обуви и аксессуаров осень-зима/2016; приятные сюрпизы и подарки для посетителей!
-////
-////📱Отслеживай актуальные скидки, акции и мероприятия Барнаула!
-////Скачать приложение: https://play.google.com/store/apps/details?id=com.dwd..
-////#TopDiscount #topdiscount #топдисконт #topdis #TD #скидкибарнаул #распродажа #барнаул #barnaul';
-
-            //не работает
-//            $post_text = '✔FUNDAY 3=2 на аксессуары!
-//Только до 26 сентября в FUNDAY действует выгодная арифметика! Аксессуары, нижнее белье, носки и колготки - 3 вещи по цене 2! В акции участвует женский, мужской и детский ассортимент! Спешите порадовать себя и своих близких! FUNa много не бывает!
-//Подробности акции в приложении!
-////
-////📱Отслеживай актуальные скидки, акции и мероприятия Барнаула!
-////Скачать приложение: https://play.google.com/store/apps/details?id=com.dwd..
-////#TopDiscount #topdiscount #топдисконт #topdis #TD #скидкибарнаул #распродажа #барнаул #barnaul';
-
-//            $post_text = '✔Лучшие предложения сентября от «Модерн»:
-//- выгодные цены;
-//- подарки при покупках;
-//- скидки в день рождение.
-//Подробнее в приложении Top Discount
-//
-//📱Отслеживай актуальные скидки, акции и мероприятия Барнаула!
-//Скачать приложение: https://play.google.com/store/apps/details?id=com.dwd..
-//#TopDiscount #topdiscount #топдисконт #topdis #TD #скидкибарнаул #распродажа #барнаул #barnaul
-//';
-//
-//            $post_text = 'СЕГОДНЯ16 СЕНТЯБРЯ - ОТКРЫТИЕ первых в Алтайском крае магазинов SINSAY CROPP MOHITO HOUS
-//';
-
-//            $post_text = ' Вусь Сентябрь и октябрь - ОТКРЫТИЕ первых в Алтайском крае магазинов SINSAY CROPP MOHITO HOUS
-//';
-
-//            $post_text =
-//            'Будь в тренде вместе с ASKENT Group!
-//
-//Хит сезона – стильные мужские и женские рюкзаки со скидкой 10% в фирменных точках ASKENT и в интернет-магазине по промо-коду «BACKPACK10SALE».
-//
-//Акция действует с 15 по 18 сентября 2016 года.';
-
-//            $post_text =
-//            'Совсем скоро начнется определение победителя розыгрыша! А мы напоминаем что победителем будет участник группы который выполнил ВСЕ условия:
-//Вступил в группу
-//Скачал приложение на смартфон
-//Сделал репост розыгрыша ЧЕРЕЗ ПРИЛОЖЕНИЕ себе на стену вк
-//Поставить лайк посту:
-//Розыгрыш:
-//';
-//            $post_text =
-//            'выгодно в магазинах Pelican.
-//            С 6 сентября 2016 года в сети фирменных магазинов Pelican и Pelican Kids действует акция на новую осеннюю коллекцию!.
-//При покупке 2-х и более вещей из новой осенней коллекции скидка на каждую вторую вещь 40.
-//Торопитесь! Акция действует до 26 сентября 2016 года.
-//            ';
-
-            while (true) {
-                if (!preg_match('/#TopDiscount/', $post_text) && $this->group->getGroupId() != -117465274) {
-                    $offset++;
-                    $resp = $this->getNews($group_id, $count, $offset);
-                    if($offset > 5) {
-                        return false;
-                    }
-                    $post_text = isset($resp['text']) ? $resp['text'] : '';
-                } else {
-                    break;
-                }
-            }
-
-
-            $post_text = mb_ereg_replace('[^а-яА-Я\w\s\.!\/:"\-\(\)=\?\#@<>]+', '', $post_text);
-            $post_text = mb_ereg_replace('Отслеживай актуальные скидки.*$', '', $post_text);
-            $post_text = mb_ereg_replace('Скачать приложение.*$', '', $post_text);
-
-            $months = array(
-                'сентябр' => 9,
-                'январ' => 1,
-                'феврал' => 2,
-                'март' => 3,
-                'апрел' => 4,
-                'май' => 5,
-                'мая' => 5,
-                'июн' => 6,
-                'июл' => 7,
-                'август' => 8,
-                'октябр' => 10,
-                'ноябр'=> 11,
-                'декабр' => 12
-            );
-
-
-            $months_flipped = array_flip($months);
-
-            $m = array();
-            $temp = mb_strtolower($post_text);
-            var_dump($temp);
-            foreach ($months as $month => $m_number) {
-                if (mb_ereg_match('.* '.$month.'.*', $temp)) {
-                    var_dump($month);
-                    $offset = mb_strpos($temp, $month);
-                    $m[] = array(
-                        'offset' => $offset,
-                        'month_number' => $m_number,
-                    );
-                }
-            }
-            if (count($m) > 1) {
-                usort($m, function ($a, $b)
-                {
-                    if ($a['offset'] == $b['offset']) {
-                        return 0;
-                    }
-                    return ($a['offset'] < $b['offset']) ? -1 : 1;
-                });
-            }
-
-            var_dump($m);
-            $date = new \DateTime();
-
-            if (count($m) == 2) {
-                $pred_offset = 0;
-                foreach ($m as $key => $value) {
-                    $len = $value['offset'] + mb_strlen($months_flipped[$value['month_number']]);
-                    $substring = mb_strtolower(mb_substr($post_text,0,$len,"UTF-8"));
-                    $res = array();
-                    $reg_exp = '(.* |^)(\d+.*'.$months_flipped[$value['month_number']].')';
-                    mb_ereg($reg_exp, $substring, $res);
-                    $day = 1;
-                    if (count($res)) {
-                        $res_need = isset($res[2]) ? $res[2] : '';
-                        $res_2 = array();
-                        mb_ereg('\d+', $res_need, $res_2);
-                        $day = isset($res_2[0]) ? $res_2[0] : '';
-                    } else {
-                        if ($key != 0) {
-                            $a_date = $date->format('Y')."-".$value['month_number']."-".$date->format('d');
-                            $day = date("t", strtotime($a_date));
-                        }
-                    }
-                    $dates[] = array(
-                        'day' => $day,
-                        'month' => $value['month_number']
-                    );
-                }
-            } elseif (count($m) == 1) {
-                //если у нас 1 месяц в объявлении
-                $value = $m[0];
-                $len = $value['offset'] + mb_strlen($months_flipped[$value['month_number']]);
-                $substring = mb_strtolower(mb_substr($post_text,0,$len,"UTF-8"));
-                // если у нас число и месяцу(что ли бо...23 сентября)
-                $reg_exp = '(.*[^0-9]|^)((\d+).*'.$months_flipped[$value['month_number']].')';
-                $res = array();
-                mb_ereg($reg_exp, $substring, $res);
-                var_dump($res);
-                $day_to = 1;
-                $day_from = 1;
-                if (count($res)) {
-                    $res_need = isset($res[2]) ? $res[2] : '';
-                    if ($res_need) {
-                        $res_2 = array();
-                        mb_ereg('\d+', $res_need, $res_2);
-                        $day_to = isset($res_2[0]) ? $res_2[0] : '';
-                        //тогда смотрим, есть ли второе число(что то ... с 12 по 13 сентября)
-                        $reg_exp = '(.*[^0-9]|^)(\d\d?)[^0-9]+(\d\d?)[^0-9]*'.$months_flipped[$value['month_number']].'';
-                        $res = array();
-                        var_dump($substring);
-                        mb_ereg($reg_exp, $substring, $res);
-                        var_dump($res);
-                        if (isset($res[2])) {
-                            $day_from = $res[2] ? $res[2] : $day_to;
-                            if (!$res[2]) {
-                                if (mb_ereg_match('.* по .*'.$months_flipped[$value['month_number']], $substring) || mb_ereg_match('.* до .*'.$months_flipped[$value['month_number']], $substring)) {
-                                    $day_from = (new \DateTime())->format('d');
-                                }
-                            }
-                        } else {
-                            $day_from = $day_to;
-                        }
-                    } else {
-                        $a_date = $date->format('Y')."-".$value['month_number']."-".$date->format('d');
-                        $day_to = date("t", strtotime($a_date));
-                    }
-                } else {
-                    $a_date = $date->format('Y')."-".$value['month_number']."-".$date->format('d');
-                    $day_to = date("t", strtotime($a_date));
-                }
-                $dates[] = array(
-                    'day' => $day_from,
-                    'month' => $value['month_number']
-                );
-                $dates[] = array(
-                    'day' => $day_to,
-                    'month' => $value['month_number']
-                );
-
-            } else {
-                $dates[] = array(
-                    'day' => (new \DateTime())->sub(new \DateInterval('P5D'))->format('d'),
-                    'month' => (new \DateTime())->format('m')
-                );
-                $dates[] = array(
-                    'day' => (new \DateTime())->add(new \DateInterval('P10D'))->format('d'),
-                    'month' => (new \DateTime())->format('m')
-                );
-            }
-
-            $cur_month = (new \DateTime())->format('m');
-            $cur_year = (new \DateTime())->format('Y');
-            $dates[0]['year'] = $cur_year;
-            $dates[1]['year'] = $cur_year;
-            if ((int)$dates[1]['month'] < $cur_month && (int)$dates[0]['month'] > $cur_month) {
-                $dates[0]['year'] = $cur_year;
-                $dates[1]['year'] = $cur_year + 1;
-            } else if ((int)$dates[1]['month'] < $cur_month && (int)$dates[0]['month'] < $cur_month) {
-                $dates[0]['year'] = $cur_year + 1;
-                $dates[1]['year'] = $cur_year + 1;
-            }
-
-            $dates[0]['time'] = '00:00:00';
-            $dates[1]['time'] = '23:59:59';
-
-        }
 
         $post_text = preg_replace('/#[^ ]+/', '', $post_text);
         $post_text = preg_replace('/<script[^>]*>(.*?)<\/script>/', '', $post_text);
@@ -571,6 +367,8 @@ class NewsDownloader
             $this->group->addNews($news);
             $news->setVkGroup($this->group);
             $news->setCategory($this->group->getCategory());
+            $slug = $this->translator->getSlug($news->getStrForSlug());
+            $news->setSlug($slug);
             $this->em->persist($news);
 //            var_dump('news_title');
 //            var_dump($news->getNewsTitle());
@@ -578,23 +376,10 @@ class NewsDownloader
                 $this->em->persist($p);
             }
 
-            if ($is_discount) {
-                $discountNews = new DiscountNews();
-                $discountNews->setDateStart(new \DateTime($dates[0]['year'].'-'
-                                            .$dates[0]['month'].'-'.
-                                            $dates[0]['day'].' '.
-                                            $dates[0]['time']));
-                $discountNews->setDateFinish(new \DateTime($dates[1]['year'].'-'
-                    .$dates[1]['month'].'-'.
-                    $dates[1]['day'].' '.
-                    $dates[1]['time']));
-                $discountNews->setNews($news);
-                $this->em->persist($discountNews);
-            }
             $this->em->flush();
 
             // Refresh siteMap
-            $url = $this->router->generate('one_news_router', ['gr_news_id'=> $news->getNewsIdFunc()], UrlGeneratorInterface::ABSOLUTE_URL);
+            $url = $this->router->generate('one_news_router_slug', ['slug'=> $news->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
             $this->site_map->addToSiteMap($url);
 
             return true;

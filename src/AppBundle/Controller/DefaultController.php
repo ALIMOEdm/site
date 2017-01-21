@@ -23,6 +23,7 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig', array(
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..'),
         ));
+
     }
 
     /**
@@ -31,6 +32,8 @@ class DefaultController extends Controller
      */
     public function testAction($offset = 0)
     {
+        echo $this->get('app.transliterator')->getSlug('Привет, как жизнь и все такое..!, это');
+        die;
 //        $ch = curl_init('http://amp.gs/8u9i');
 //        curl_exec($ch);
 //        $info = curl_getinfo($ch);

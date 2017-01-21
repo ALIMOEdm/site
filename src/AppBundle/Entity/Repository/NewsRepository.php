@@ -76,7 +76,7 @@ class NewsRepository extends EntityRepository
             ->andWhere($qb->expr()->in('n.id', $ids))
             ->orderBy('n.news_date', 'DESC');
         $qb->select(
-            'partial n.{id,news_title,news_description,news_id,news_site_link,news_vk_link,news_date}',
+            'partial n.{id,news_title,news_description,news_id,news_site_link,news_vk_link,news_date,slug}',
             'vk_group', 'photos', '('.$qb_pictures->getDQL().') as cnt_views');
 
         return $qb->getQuery()->execute();
@@ -185,6 +185,23 @@ class NewsRepository extends EntityRepository
         return $res->getOneOrNullResult();
     }
 
+    public function getNewsBySlug($slug, $checkDeleted = 1)
+    {
+        $res = $this->createQueryBuilder('n')
+            ->where('n.slug=:slug')
+            ->leftJoin('n.vk_group', 'vk_group')
+            ->setParameter(':slug', $slug)
+        ;
+
+        if($checkDeleted){
+            $res->andWhere('n.deleted=:deleted')
+                ->setParameter(':deleted', 0);
+        }
+
+
+        return $res->getQuery()->getOneOrNullResult();
+    }
+
     public function getQueryBuilderForViewCounter()
     {
         $qb_pictures = $this->_em->createQueryBuilder()
@@ -244,14 +261,14 @@ class NewsRepository extends EntityRepository
 
         if($query){
             $qb->select(
-                'partial n.{id,news_title,news_description,news_id,news_site_link,news_vk_link,news_date}',
+                'partial n.{id,news_title,news_description,news_id,news_site_link,news_vk_link,news_date,slug}',
 //                'n',
                 'vk_group', 'photos', '('.$qb_pictures->getDQL().') as cnt_views', $query . ' as relevant')
                 ->andWhere($query . ">0")
                 ->orderBy('relevant', 'DESC');
         }else{
             $qb->select(
-                'partial n.{id,news_title,news_description,news_id,news_site_link,news_vk_link,news_date}',
+                'partial n.{id,news_title,news_description,news_id,news_site_link,news_vk_link,news_date, slug}',
 //                'n',
                 'vk_group', 'photos', '('.$qb_pictures->getDQL().') as cnt_views');
         }
@@ -272,8 +289,9 @@ class NewsRepository extends EntityRepository
         if (!$date_start && !$query) {
             $date_start_def = new \DateTime();
             $date_start_def->sub(new \DateInterval('P2D'));
-            $qb->andWhere('n.news_date_time>:date_start_default')
-                ->setParameter(':date_start_default', $date_start_def);
+//            $qb
+//                ->andWhere('n.news_date_time>:date_start_default')
+//                ->setParameter(':date_start_default', $date_start_def);
         }
 
         return $qb->getQuery();
@@ -284,6 +302,16 @@ class NewsRepository extends EntityRepository
             ->where('n.news_title=\'\' AND n.news_description=\'\'')
             ->orderBy('n.news_date', 'DESC')
             ->setMaxResults(30);
+
+        return $qb->getQuery()->execute();
+    }
+
+    public function getNewsWithoutSlug($limit, $offset)
+    {
+        $qb = $this->createQueryBuilder('n')
+            ->where('n.slug=\'\'')
+            ->setMaxResults($limit)
+        ->setFirstResult($offset);
 
         return $qb->getQuery()->execute();
     }

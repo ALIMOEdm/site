@@ -29,13 +29,33 @@ class OneNewsController extends Controller{
      * @Route("/news/{gr_news_id}", name="one_news_router")
      * @Template()
      */
-    public function indexAction(Request $request, $gr_news_id){
+    public function index2Action(Request $request, $gr_news_id)
+    {
         $em = $this->getDoctrine()->getManager();
         $news_repository = $em->getRepository('AppBundle:News');
 
         list($group_id, $news_id) = explode('_', $gr_news_id);
-
         $one_news = $news_repository->getNewsByNewsIdAndVkId($news_id, -$group_id);
+
+        if(!$one_news){
+            throw new NotFoundHttpException('Запрашиваемая новость не найдена');
+        }
+
+        return $this->redirectToRoute('one_news_router_slug', ['slug' => $one_news->getSlug()]);
+    }
+
+    /**
+     * Show one news
+     * @Route("/altai-news/{slug}", name="one_news_router_slug")
+     * @Template()
+     */
+    public function indexAction(Request $request, $slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $news_repository = $em->getRepository('AppBundle:News');
+
+
+        $one_news = $news_repository->getNewsBySlug($slug);
 
         if(!$one_news){
             throw new NotFoundHttpException('Запрашиваемая новость не найдена');

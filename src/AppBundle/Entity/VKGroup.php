@@ -10,7 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\VKGroupRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(indexes={@ORM\Index(name="theme_index", columns={"group_theme"})})
+ * @ORM\Table(indexes={@ORM\Index(name="theme_index", columns={"group_theme"}),
+ *                  @ORM\Index(name="group_id_index", columns={"group_id"})
+ * })
  */
 class VKGroup {
     /**
