@@ -310,6 +310,7 @@ class NewsRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('n')
             ->where('n.slug=\'\'')
+            ->orderBy('n.createdAt', 'DESC')
             ->setMaxResults($limit)
         ->setFirstResult($offset);
 
