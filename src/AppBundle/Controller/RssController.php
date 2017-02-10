@@ -35,7 +35,7 @@ class RssController extends Controller{
         if(count($news)){
             foreach($news as $v){
                 $e = $v[0];
-                $e = $this->setAdditionalFiledToSkin($v, $e);
+//                $e = $this->setAdditionalFiledToSkin($v, $e);
                 $entities_news[] = $e;
             }
             $lastUpdated = $entities_news[0]->getCreatedAt()->format($format);
