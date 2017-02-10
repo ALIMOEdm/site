@@ -97,6 +97,10 @@ class NewsRepository extends EntityRepository
 
         $qb->setMaxResults($limit);
 
+        $qb->select(
+            'partial n.{id,news_title,news_description,news_id,news_site_link,news_vk_link,news_date,slug}',
+            'vk_group', 'photos');
+
         return $qb->getQuery()->execute();
     }
 

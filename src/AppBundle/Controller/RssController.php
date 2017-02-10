@@ -38,20 +38,24 @@ class RssController extends Controller{
                 $e = $this->setAdditionalFiledToSkin($v, $e);
                 $entities_news[] = $e;
             }
-        }
-        $latest_new = $em->getRepository('AppBundle:News')->getLatestNews(3, 1, 'news');
-        if(count($latest_new)){
-            foreach($latest_new as $v){
-                $e = $v[0];
-                $e = $this->setAdditionalFiledToSkin($v, $e);
-                $entities[] = $e;
-            }
-
-            $lastUpdated = $entities[0]->getCreatedAt()->format($format);
+            $lastUpdated = $entities_news[0]->getCreatedAt()->format($format);
         }else{
             $lastUpdated = new \DateTime();
             $lastUpdated = $lastUpdated->format($format);
         }
+//        $latest_new = $em->getRepository('AppBundle:News')->getLatestNews(3, 1, 'news');
+//        if(count($latest_new)){
+//            foreach($latest_new as $v){
+//                $e = $v[0];
+//                $e = $this->setAdditionalFiledToSkin($v, $e);
+//                $entities[] = $e;
+//            }
+//
+//            $lastUpdated = $entities[0]->getCreatedAt()->format($format);
+//        }else{
+//            $lastUpdated = new \DateTime();
+//            $lastUpdated = $lastUpdated->format($format);
+//        }
 
         return array(
             'news' => $entities_news,
