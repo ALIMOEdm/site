@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss xmlns:yandex="http://news.yandex.ru" xmlns:media="http://search.yahoo.com/mrss/"
+<rss
+        xmlns:yandex="http://news.yandex.ru" xmlns:media="http://search.yahoo.com/mrss/"
      version="2.0">
     <channel>
         <title>{{ rss_title }}</title>
@@ -33,14 +34,13 @@
 
                 <yandex:genre>message</yandex:genre>
                 <author>Михаил Илларионов</author>
-                {#<category>Технологии</category>#}
 
                 <guid>
                     {{ url('one_news_router_slug', {'slug': n.getSlug }) }}
                 </guid>
-                {#<media:thumbnail url='{{ n.getImage('main_news_2').url }}' />#}
-                <enclosure url='{{ n.getImage('main_news_2').url }}' length="{{ n.getImage('main_news_2').url|imgSize }}"
-                           type="{{ n.getImage('main_news_2').url|imgMimeType }}"/>
+                <media:thumbnail url='{{ n.getImage('main_news_2').url }}' />
+                {#<enclosure url='{{ n.getImage('main_news_2').url }}' length="{{ n.getImage('main_news_2').url|imgSize }}"#}
+                           {#type="{{ n.getImage('main_news_2').url|imgMimeType }}"/>#}
 
 
 

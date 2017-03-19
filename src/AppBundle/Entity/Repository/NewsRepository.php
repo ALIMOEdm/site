@@ -106,6 +106,7 @@ class NewsRepository extends EntityRepository
 
     public function getNewsForYandexRSS($photo_size = 3, $limit = 3, $theme = ''){
         $qb = $this->getNewsF();
+        $qb->select('partial n.{id,news_title,news_description,news_id,news_site_link,news_vk_link,news_date,slug,createdAt}', 'vk_group', 'photos', 'COUNT(views.id) as cnt_views');
         $qb->where('n.news_vk_link<>\'\' AND photos.id IS NOT NULL AND photos.sizeInt>=:photo_size AND n.deleted=0')
             ->andWhere('n.news_title<>\'\' AND n.news_description<>\'\' AND n.news_text_parsed<>\'\'')
             ->setParameter(':photo_size', $photo_size);
@@ -290,12 +291,12 @@ class NewsRepository extends EntityRepository
                 ->setParameter(':date_finish', $date_finish);
         }
 
-        if (!$date_start && !$query) {
-            $date_start_def = new \DateTime();
-            $date_start_def->sub(new \DateInterval('P2D'));
-            $qb ->andWhere('n.news_date_time>:date_start_default')
-                ->setParameter(':date_start_default', $date_start_def);
-        }
+//        if (!$date_start && !$query) {
+//            $date_start_def = new \DateTime();
+//            $date_start_def->sub(new \DateInterval('P2D'));
+//            $qb ->andWhere('n.news_date_time>:date_start_default')
+//                ->setParameter(':date_start_default', $date_start_def);
+//        }
 
         return $qb->getQuery();
     }

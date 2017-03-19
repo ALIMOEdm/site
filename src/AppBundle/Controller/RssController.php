@@ -72,7 +72,7 @@ class RssController extends Controller{
     {
         $format = $this->getParameter('rss_date_format');
         $em = $this->getDoctrine()->getManager();
-        $news = $em->getRepository('AppBundle:News')->getNewsForYandexRSS(3, 10, 'news');
+        $news = $em->getRepository('AppBundle:News')->getNewsForYandexRSS(3, 3, 'news');
         $entities_news = array();
         if (count($news)) {
             foreach($news as $v){
