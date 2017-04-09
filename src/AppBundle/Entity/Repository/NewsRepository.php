@@ -291,12 +291,12 @@ class NewsRepository extends EntityRepository
                 ->setParameter(':date_finish', $date_finish);
         }
 
-//        if (!$date_start && !$query) {
-//            $date_start_def = new \DateTime();
-//            $date_start_def->sub(new \DateInterval('P2D'));
-//            $qb ->andWhere('n.news_date_time>:date_start_default')
-//                ->setParameter(':date_start_default', $date_start_def);
-//        }
+        if (!$date_start && !$query) {
+            $date_start_def = new \DateTime();
+            $date_start_def->sub(new \DateInterval('P3D'));
+            $qb ->andWhere('n.news_date_time>:date_start_default')
+                ->setParameter(':date_start_default', $date_start_def);
+        }
 
         return $qb->getQuery();
     }
