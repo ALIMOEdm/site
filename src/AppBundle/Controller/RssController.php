@@ -10,10 +10,12 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\News;
 use AppBundle\Entity\NewsPicture;
+use AppBundle\Entity\Repository\NewsRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class RssController
@@ -72,7 +74,9 @@ class RssController extends Controller{
     {
         $format = $this->getParameter('rss_date_format');
         $em = $this->getDoctrine()->getManager();
-        $news = $em->getRepository('AppBundle:News')->getNewsForYandexRSS(3, 3, 'news');
+        /** @var NewsRepository $newsRepository */
+        $newsRepository = $em->getRepository('AppBundle:News');
+        $news = $newsRepository->getNewsForYandexRSS(3, 3, 'news');
         $entities_news = array();
         if (count($news)) {
             foreach($news as $v){
@@ -86,6 +90,7 @@ class RssController extends Controller{
             $lastUpdated = $lastUpdated->format($format);
         }
 
+//        return new Response();
         return array(
             'news' => $entities_news,
             'lastUpdated' => $lastUpdated,
