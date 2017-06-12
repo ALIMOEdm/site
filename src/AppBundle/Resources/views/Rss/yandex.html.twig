@@ -38,11 +38,10 @@
                 <guid>
                     {{ url('one_news_router_slug', {'slug': n.getSlug }) }}
                 </guid>
-               {# <media:thumbnail url='{{ n.getImage('main_news_2').url }}' />#}
-                {#<enclosure url='{{ n.getImage('main_news_2').url }}' length="{{ n.getImage('main_news_2').url|imgSize }}"#}
-                           {#type="{{ n.getImage('main_news_2').url|imgMimeType }}"/>#}
 
-
+                {#<media:thumbnail url='{{ n.getImage('main_news_2').url }}' />#}
+                <enclosure url='{{ n.getImage('main_news_2').url }}' length="{{ n.getImage('main_news_2').url|imgSize }}"
+                           type="{{ n.getImage('main_news_2').url|imgMimeType }}"/>
 
 
                 {#Встречающиеся в тексте символы < > & ' " необходимо заменять на соответствующие#}
