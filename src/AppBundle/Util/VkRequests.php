@@ -8,6 +8,7 @@ class VkRequests {
         $url .= "&count=".$count;
         $url .= "&filter=owner";
         $url .= "&offset=".$offset;
+	$url .= "&access_token=89de93b789de93b7896ea138f1898a51f0889de89de93b7d1138c017cc42cc7dc5534ab";
 
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
