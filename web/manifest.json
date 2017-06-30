@@ -1,0 +1,22 @@
+{
+  "short_name": "DishAlt",
+  "name": "DishAlt News Portal",
+  "icons": [
+    {
+      "src": "white_design/img/favicon/launcher-icon-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "white_design/img/favicon/launcher-icon-2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "white_design/img/favicon/launcher-icon-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/?launcher=true"
+}
