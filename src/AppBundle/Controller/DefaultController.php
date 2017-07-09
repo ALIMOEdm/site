@@ -32,8 +32,6 @@ class DefaultController extends Controller
      */
     public function testAction($offset = 0)
     {
-        echo $this->get('app.transliterator')->getSlug('Привет, как жизнь и все такое..!, это');
-        die;
 //        $ch = curl_init('http://amp.gs/8u9i');
 //        curl_exec($ch);
 //        $info = curl_getinfo($ch);
@@ -48,53 +46,17 @@ class DefaultController extends Controller
 //        $group = '-66778909';
 //        $group = '-113426229';
 //        $group = '-113535804';
-//        try {
-////            $this->get('app.news_downloader')->requestForNew($group, 'amic', 1, $offset);
-//            $this->get('app.news_downloader')->requestForNew($group, '', 1, 0);
-//
-//        } catch (\Exception $e) {
-//            return array('result' => $e->getMessage());
-//        }
+        try {
+//            $this->get('app.news_downloader')->requestForNew($group, 'amic', 1, $offset);
+            $this->get('app.news_downloader')->requestForNew($group, '', 1, 0);
+
+        } catch (\Exception $e) {
+            return array('result' => $e->getMessage());
+        }
 
 //        $this->get('app.traffic_manager')->refreshData();
 //        $this->get('app.site_map')->addToSiteMap('test');
         return array('result' => 'OK');
-    }
-
-    /**
-     * @Route("/test_map", name="test_map")
-     * @Template()
-     */
-    public function testMapAction($offset = 0)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $route_rep = $em->getRepository('AppBundle:Traffic\Route');
-        $station_rep = $em->getRepository('AppBundle:Traffic\Station');
-        $zone_rep = $em->getRepository('AppBundle:Traffic\Zone');
-
-        $routes = $route_rep->findAll();
-        $routes_array = array();
-        foreach ($routes as $r) {
-            $routes_array[] = $r->serialize();
-        }
-
-        $stations = $station_rep->findAll();
-        $stations_array = array();
-        foreach ($stations as $r) {
-            $stations_array[] = $r->serialize();
-        }
-
-        $zones = $zone_rep->getZones();
-        $zones_array = array();
-        foreach ($zones as $r) {
-            $zones_array[] = $r->serialize();
-        }
-
-        return array(
-            'routes' => json_encode($routes_array),
-            'stations' => json_encode($stations_array),
-            'zones' => json_encode($zones_array),
-        );
     }
 
     /**

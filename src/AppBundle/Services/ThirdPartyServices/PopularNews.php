@@ -7,17 +7,30 @@
  */
 
 namespace AppBundle\Services\ThirdPartyServices;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Class PopularNews Для формирования списка популярных новостей
  * @package AppBundle\Services\ThirdPartyServices
  */
-class PopularNews extends BaseThirdParty{
+class PopularNews extends BaseThirdParty
+{
+    /**
+     * @var EntityManager
+     */
     protected $em;
+    /**
+     * @var array
+     */
     protected $fields = array('popular_news');
 
-    public function __construct($em)
+    /**
+     * PopularNews constructor.
+     * @param EntityManager $em
+     */
+    public function __construct(EntityManager $em)
     {
+        parent::__construct($em);
         $this->em = $em;
     }
 

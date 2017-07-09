@@ -39,7 +39,7 @@ class AmicParser  extends Parser{
 
             $this->removeElementByXpath(".//img");
             $this->removeElementByXpath(".//div[contains(@class,'slideshowPlugin')]");
-        }else{
+        } else {
             $content = $this->getSetOfNodesByXpath(".//div[contains(@class, 'news_body')]/div[contains(@class, 'content')]");
             if(!is_null($content) && $content->length) {
                 foreach ($content as $cont) {
@@ -49,6 +49,17 @@ class AmicParser  extends Parser{
 
                 $this->removeElementByXpath(".//img");
                 $this->removeElementByXpath(".//div[contains(@class,'slideshowPlugin')]");
+            } else {
+                $content = $this->getSetOfNodesByXpath(".//div[@id='news_body']/div[contains(@class, 'content')]");
+                if (!is_null($content) && $content->length) {
+                    foreach ($content as $cont) {
+                        $content_node = $cont;
+                        break;
+                    }
+
+                    $this->removeElementByXpath(".//img");
+                    $this->removeElementByXpath(".//div[contains(@class,'slideshowPlugin')]");
+                }
             }
         }
 

@@ -37,6 +37,7 @@ class ReceiveWeather extends BaseThirdParty{
      * Get weather for some city
      *
      * @param $resp
+     *
      * @return array
      */
     public function parseResponse($resp)

@@ -2,6 +2,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Information\AdditionalInfo;
+use AppBundle\Entity\News;
 use AppBundle\Entity\NewsCategory;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -14,7 +15,7 @@ class AdditionalInfoData extends AbstractFixture implements OrderedFixtureInterf
      */
     public function load(ObjectManager $manager)
     {
-        foreach ($this->getData() as $additionalInfoData) {
+        foreach ($this->getData($manager) as $additionalInfoData) {
             $additionalInfo = new AdditionalInfo();
             $additionalInfo->setParamName($additionalInfoData[0]);
             $additionalInfo->setParamValue($additionalInfoData[1]);
@@ -30,14 +31,16 @@ class AdditionalInfoData extends AbstractFixture implements OrderedFixtureInterf
      */
     public function getOrder() : int
     {
-        return 1;
+        return 4;
     }
 
     /**
      * @return array
      */
-    public function getData() : array
+    public function getData(ObjectManager $manager) : array
     {
+        /** @var News[] $news */
+        $news = $manager->getRepository(News::class)->findAll();
         $data = [
             [
                 'USD',
@@ -69,7 +72,7 @@ class AdditionalInfoData extends AbstractFixture implements OrderedFixtureInterf
             ],
             [
                 'popular_news',
-                '',
+                implode(',', [$news[0]->getId(),$news[2]->getId(),$news[33]->getId()]),
             ],
         ];
 

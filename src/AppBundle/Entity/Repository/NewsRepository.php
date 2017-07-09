@@ -260,9 +260,7 @@ class NewsRepository extends EntityRepository
             ->andWhere('n.news_title<>\'\'')
             ->andWhere('vk_group.deleted=0')
             ->andWhere('category.indentity<>\'discount\'')
-
-            ->orderBy('n.news_date', 'DESC');
-//            ->groupBy('n.id');
+            ;
 
         if($query){
             $qb->select(
@@ -290,6 +288,8 @@ class NewsRepository extends EntityRepository
             $qb ->andWhere('n.news_date_time<=:date_finish')
                 ->setParameter(':date_finish', $date_finish);
         }
+
+        $qb->orderBy('n.news_date', 'DESC');
 
         if (!$date_start && !$query) {
             $date_start_def = new \DateTime();

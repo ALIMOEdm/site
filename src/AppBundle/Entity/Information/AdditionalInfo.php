@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\Information\AdditionalInfo")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\Information\AdditionalInfoRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(indexes={@ORM\Index(name="key_index", columns={"param_name"})})
  */

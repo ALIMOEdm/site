@@ -3,27 +3,58 @@
 namespace AppBundle\Services\ThirdPartyServices;
 
 
-class Celebrate extends BaseThirdParty{
+use Doctrine\ORM\EntityManager;
+
+class Celebrate extends BaseThirdParty
+{
+    const TYPE = 'celebrate';
+
+    /**
+     * @var string
+     */
     protected $url = 'http://www.calend.ru/day/{=date=}/';
+    /**
+     * @var \DOMDocument
+     */
     private $dom;
+    /**
+     * @var \DOMXPath
+     */
     protected $finder;
 
+    /**
+     * @var array
+     */
     protected $fields = array('celebrate');
-    const TYPE = 'celebrate';
+
+    /**
+     * @var string
+     */
     public $type = 'celebrate';
 
-    public function __construct($em)
+    /**
+     * Celebrate constructor.
+     * @param EntityManager $em
+     */
+    public function __construct(EntityManager $em)
     {
         parent::__construct($em);
         $this->dom = new \DOMDocument();
     }
 
-    public function getParseFunction()
+    /**
+     * @return string
+     */
+    public function getParseFunction() : string
     {
         return 'parseResponse';
     }
 
-    public function parseResponse($html)
+    /**
+     * @param string $html
+     * @return array|string
+     */
+    public function parseResponse(string $html)
     {
         if(!trim($html)){
             return '';

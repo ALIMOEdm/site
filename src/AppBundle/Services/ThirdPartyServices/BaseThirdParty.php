@@ -1,35 +1,50 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alimoedm
- * Date: 16.08.2016
- * Time: 23:29
- */
-
 namespace AppBundle\Services\ThirdPartyServices;
 
-
 use AppBundle\Entity\Information\AdditionalInfo;
+use AppBundle\Entity\Repository\Information\AdditionalInfoRepository;
+use Doctrine\ORM\EntityManager;
 
+/**
+ * Class BaseThirdParty
+ * @package AppBundle\Services\ThirdPartyServices
+ */
 class BaseThirdParty
 {
-    protected $fields = array();
+    /**
+     * @var array
+     */
+    protected $fields = [];
 
+    /**
+     * @var EntityManager
+     */
     protected $em;
-    public function __construct($em)
+
+    /**
+     * BaseThirdParty constructor.
+     * @param EntityManager $em
+     */
+    public function __construct(EntityManager $em)
     {
         $this->em = $em;
     }
 
-    public function getFields()
+    /**
+     * @return array
+     */
+    public function getFields() : array
     {
         return $this->fields;
     }
 
-
-    public function save($data)
+    /**
+     * @param array $data
+     */
+    public function save(array $data)
     {
-        $repository = $this->em->getRepository('AppBundle:Information\AdditionalInfo');
+        /** @var AdditionalInfoRepository $repository */
+        $repository = $this->em->getRepository(AdditionalInfo::class);
 
         if (is_array($this->getFields())) {
             foreach ($this->getFields() as $field) {
@@ -49,9 +64,13 @@ class BaseThirdParty
         }
     }
 
-    public function getInformation()
+    /**
+     * @return array
+     */
+    public function getInformation() : array
     {
-        $res = $this->em->getRepository('AppBundle:Information\AdditionalInfo')->getInformation($this->getFields());
+        /** @var AdditionalInfo[] $res */
+        $res = $this->em->getRepository(AdditionalInfo::class)->getInformation($this->getFields());
         $return = array();
         if (count($res)) {
             foreach ($res as $r) {
