@@ -2,6 +2,13 @@
 <!DOCTYPE html>
 <html lang="ru" class="no-js">
 <head itemscope itemtype="http://schema.org/WebSite">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="//dish-alt.ru">
+    <link rel="dns-prefetch" href="//mc.yandex.ru">
+    <link rel="dns-prefetch" href="//pp.vk.me">
+    <link rel="dns-prefetch" href="//pp.userapi.me">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//top-fwz1.mail.ru">
     <meta charset="utf-8">
     <title itemprop='name'>
         {% block title %}
@@ -106,6 +113,13 @@
 
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
+
+    <!-- Загрузка “поздно-обнаруживаемых” ресурсов -->
+    <link rel="preload" href="{{ asset('white_design_2/js/libs.js?1231313') }}" as="script">
+    <link rel="preload" href="{{ asset('white_design_2/js/common.js?234242412356') }}" as="script">
+    <link rel="preload" href="{{ asset('white_design/js/script.js?34534523315') }}" as="script">
+    <link rel="preload" href="{{ asset('https://mc.yandex.ru/metrika/watch.js') }}" as="script">
+    <!-- END Загрузка “поздно-обнаруживаемых” ресурсов -->
 </head>
 <body><!-- Здесь пишем код-->
 
