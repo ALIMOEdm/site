@@ -3,4 +3,4 @@ tests:
         path: "/.*"
         assertions:
             - main.wall_time < 50ms
-            - main.memory < 2Mb
+            - main. memory < 2Mb

@@ -149,9 +149,9 @@ class NewsDownloader
         $post_date = isset($resp['date']) ? $resp['date'] : '';
         $post_id = isset($resp['id']) ? $resp['id'] : '';
 
-//        if($news_repository->checkNewsExists($post_id, $group_id)){
-//            throw new \Exception('The news already exists');
-//        }
+        if($news_repository->checkNewsExists($post_id, $group_id)){
+            throw new \Exception('The news already exists');
+        }
 
         $news = new News();
         $news->setNewsDate($post_date);
