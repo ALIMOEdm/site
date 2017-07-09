@@ -4,6 +4,9 @@ namespace AppBundle\Services;
 use AppBundle\Entity\DiscountNews;
 use AppBundle\Entity\News;
 use AppBundle\Entity\NewsPicture;
+use AppBundle\Entity\Repository\NewsRepository;
+use AppBundle\Entity\Repository\VKGroupRepository;
+use AppBundle\Entity\VKGroup;
 use AppBundle\Util\Agro22;
 use AppBundle\Util\AifAltay;
 use AppBundle\Util\Altaisport;
@@ -40,7 +43,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class NewsDownloader
 {
-
     /**
      * @var
      */
@@ -85,7 +87,8 @@ class NewsDownloader
         $this->translator = $translator;
     }
 
-    public function getNews($group_id, $count, $offset){
+    public function getNews($group_id, $count, $offset)
+    {
         $res = VkRequests::getLatestNews($group_id, $count, $offset);
 
         if(is_null($res)){
@@ -113,31 +116,29 @@ class NewsDownloader
      * @return bool
      * @throws \Exception
      */
-    public function requestForNew($group_id, $group_name = '', $count = 1, $offset = 0){
+    public function requestForNew($group_id, $group_name = '', $count = 1, $offset = 0)
+    {
         $this->setGroup($group_id);
 
         var_dump('//////////////////////////');
         var_dump($group_id);
 
         $images = array();
-        $news_repository = $this->em->getRepository('AppBundle:News');
+        /** @var NewsRepository $news_repository */
+        $news_repository = $this->em->getRepository(News::class);
 
-        try{
+        try {
             $resp = $this->getNews($group_id, $count, $offset);
             $is_pinned = isset($resp['is_pinned']) ? $resp['is_pinned'] : '';
             if($is_pinned){
                 $offset++;
                 $resp = $this->getNews($group_id, $count, $offset);
             }
-        }
-        catch(\Exception $e){
+        } catch(\Exception $e){
             throw new \Exception($e->getMessage());
         }
 
         $post_text = isset($resp['text']) ? $resp['text'] : '';
-
-        $is_discount = false;
-        $dates = array();
 
         mb_regex_encoding("UTF-8");
         mb_internal_encoding("UTF-8");
@@ -165,8 +166,6 @@ class NewsDownloader
         $post_text = preg_replace('/(<(br\/?)>){2,}/', '.<br/>', $post_text );
         $post_text = preg_replace('/[.]+/', '.', $post_text );
         $post_text = trim($post_text);
-
-
 
         $text = '';
         $news_prev = new NewsPreview();
@@ -483,7 +482,8 @@ class NewsDownloader
         $this->group = $this->em->getRepository('AppBundle:VKGroup')->findOneBy(array('group_id' => $group_id));
     }
 
-    public function getGroupUrl(){
+    public function getGroupUrl()
+    {
         return $this->group->getGroupUrl();
     }
 
@@ -492,11 +492,13 @@ class NewsDownloader
      * @param $url
      * @return string
      */
-    public function getImageSize($url){
+    public function getImageSize($url)
+    {
         if (!$this->checkRemoteFile($url)) {
             return 'small';
         }
-        if(!isset($this->cache_img_size_by_url[$url])){
+
+        if (!isset($this->cache_img_size_by_url[$url])) {
             $this->cache_img_size_by_url[$url] = getimagesize($url);
         }
         $type = $this->cache_img_size_by_url[$url];
@@ -547,11 +549,12 @@ class NewsDownloader
      * @param $url
      * @return int
      */
-    public function getImageSizeInt($url){
+    public function getImageSizeInt($url)
+    {
         if (!$this->checkRemoteFile($url)) {
             return 1;
         }
-        if(!isset($this->cache_img_size_by_url[$url])){
+        if (!isset($this->cache_img_size_by_url[$url])) {
             $this->cache_img_size_by_url[$url] = getimagesize($url);
         }
         $type = $this->cache_img_size_by_url[$url];
@@ -582,11 +585,13 @@ class NewsDownloader
         }
     }
 
-    public function requestForNews(){
+    public function requestForNews()
+    {
         $cnt = 0;
         while($cnt < 7) {
             $cnt++;
-            $group = $this->em->getRepository('AppBundle:VKGroup')->getNext();
+            /** @var VKGroup $group */
+            $group = $this->em->getRepository(VKGroup::class)->getNext();
             if (count($group)) {
                 $group = $group[0];
                 $group->setRequestedDate(new \DateTime());
