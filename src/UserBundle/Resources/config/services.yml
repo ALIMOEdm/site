@@ -1,0 +1,7 @@
+services:
+    user.user_manipulator:
+        class: UserBundle\Services\UserManipulator
+        arguments:
+            - '@fos_user.user_manager'
+            - '@event_dispatcher'
+            - '@request_stack'

@@ -1,0 +1,26 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body %}
+
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    {{ include('AdminBundle:General:sidebar.html.twig') }}
+                </div>
+            </div>
+
+            {{ include('AdminBundle:General:top_navigation.html.twig') }}
+
+            <!-- page content -->
+            <div class="right_col" role="main">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+            {{ include('AdminBundle:General:footer.html.twig') }}
+        </div>
+    </div>
+
+
+{% endblock %}
