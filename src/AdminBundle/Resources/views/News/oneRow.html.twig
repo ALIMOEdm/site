@@ -1,0 +1,55 @@
+<div class="new-card" itemscope>
+    <a href="{{ path('one_news_router_slug', {'slug': news.getSlug }) }}">
+        {% if  news.getImage('main_news_2') %}
+
+            <div itemprop="image" class="new-card-preview-image" data-role="news-image"
+                 style="background-image: url('{{ news.getImage('main_news_2').url }}');"></div>
+        {% else %}
+            <div itemprop="image" class="new-card-preview-image" data-role="news-image"
+                 style="background-image: url('{{ asset('/white_design_2/img/images/default.jpg') }}');"></div>
+        {% endif %}
+    </a>
+
+    <a href="{{ path('one_news_router_slug', {'slug': news.getSlug }) }}">
+        {% if news.getNewsTitle %}
+            <div class="title" itemprop="title">
+                {{ news.getNewsTitle }}
+            </div>
+        {% endif %}
+    </a>
+    {% if news.getNewsDescription %}
+        <div class="description preview-description dotdotdot js-main-news-description" itemprop="short_description" itemscope >
+            <p class="news-description-text" data-text="{{ news.getNewsDescription }}" data-id="{{ news.id }}">
+                <script>
+                    var el = document.querySelector("[data-id='{{ news.id }}']");
+                    el.innerHTML = el.getAttribute('data-text');
+                </script>
+            </p>
+        </div>
+    {% endif %}
+
+    <div class="footer">
+        <div class="row">
+            <div class="col-xs-8 text-xs-left">
+                <div class="publication-date element">
+                    <div class="fa fa-clock-o"></div>
+                    <button href="#" title="Отфильтровать новости по дате" class="filter-date btn btn-link"><span  itemprop="date_create">{{ news.getNewsFormatDate }}</span></button>
+                </div>
+                <div class="divider element"></div>
+                <div class="source element">
+                    <div class="fa fa-newspaper-o"></div>
+                    <button href="#" title="Отфильтровать новости по группе" class="filter-group btn btn-link" itemprop="source_group">{{ news.getVkGroup.getGroupTitle }}</button>
+                </div>
+            </div>
+            <div class="col-xs-4 text-xs-right">
+                <div class="views element">
+                    <div class="fa fa-eye"></div><span itemprop="count_of_views">{{ news.getCntViews }}</span>
+                </div>
+                {#<div class="divider element"></div>#}
+                {#<div class="comments element">#}
+                {#<div class="fa fa-comment-o"></div><span>8</span>#}
+                {#</div>#}
+            </div>
+        </div>
+    </div>
+</div>

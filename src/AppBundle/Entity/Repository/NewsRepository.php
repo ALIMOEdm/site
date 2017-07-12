@@ -247,6 +247,13 @@ class NewsRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
+    /**
+     * @param string $date_start
+     * @param string $date_finish
+     * @param array $groups
+     * @param string $query
+     * @return \Doctrine\ORM\Query
+     */
     public function getListOfNewsQuery($date_start, $date_finish, array $groups, $query = '')
     {
         $qb_pictures = $this->getQueryBuilderForViewCounter();

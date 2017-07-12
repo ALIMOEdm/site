@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>News</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ news.id }}</td>
+            </tr>
+            <tr>
+                <th>News_text</th>
+                <td>{{ news.newstext }}</td>
+            </tr>
+            <tr>
+                <th>News_text_origin</th>
+                <td>{{ news.newstextorigin }}</td>
+            </tr>
+            <tr>
+                <th>News_text_parsed</th>
+                <td>{{ news.newstextparsed }}</td>
+            </tr>
+            <tr>
+                <th>News_title</th>
+                <td>{{ news.newstitle }}</td>
+            </tr>
+            <tr>
+                <th>News_description</th>
+                <td>{{ news.newsdescription }}</td>
+            </tr>
+            <tr>
+                <th>News_id</th>
+                <td>{{ news.newsid }}</td>
+            </tr>
+            <tr>
+                <th>News_site_link</th>
+                <td>{{ news.newssitelink }}</td>
+            </tr>
+            <tr>
+                <th>News_vk_link</th>
+                <td>{{ news.newsvklink }}</td>
+            </tr>
+            <tr>
+                <th>News_date</th>
+                <td>{{ news.newsdate }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if news.createdAt %}{{ news.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if news.updatedAt %}{{ news.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>News_date_time</th>
+                <td>{% if news.newsdatetime %}{{ news.newsdatetime|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ news.slug }}</td>
+            </tr>
+            <tr>
+                <th>Deleted</th>
+                <td>{% if news.deleted %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('news_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('news_edit', { 'id': news.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

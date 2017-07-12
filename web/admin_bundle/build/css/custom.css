@@ -490,7 +490,7 @@ body {
     color: #73879C;
     background: #2A3F54;
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.471
 }
@@ -1488,7 +1488,15 @@ ul.msg_list li a .image img {
     -webkit-border-radius: 2px 2px 2px 2px;
     float: left;
     margin-right: 10px;
-    width: 11%
+    width: 13%
+}
+
+ul.msg_list li a .image.entity-main-list img {
+    border-radius: 2px 2px 2px 2px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+    float: left;
+    margin-right: 10px;
+    width: 15%
 }
 ul.msg_list li a .time {
     font-size: 11px;
@@ -1500,6 +1508,10 @@ ul.msg_list li a .time {
 ul.msg_list li a .message {
     display: block !important;
     font-size: 11px
+}
+ul.msg_list li a .message.entity-main-list {
+    display: block !important;
+    font-size: 13px
 }
 .dropdown-menu.msg_list span {
     white-space: normal
@@ -4249,3 +4261,76 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     background-color: #ffff !important;
 }
 /** /bootstrap-datetimepicker **/
+
+.new-card {
+    position: relative;
+    border: 1px solid rgba(0,0,0,.05);
+    padding: 10px 20px;
+    margin: 20px 0;
+    background: #fff;
+}
+
+.new-card .new-card-preview-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    overflow: hidden;
+    background: center;
+    background-image: none;
+    background-size: auto auto;
+    background-size: cover;
+}
+.preview-description {
+    overflow-wrap: break-word;
+}
+.section-news .new-card .title, .section-news .new-card .description, .section-news .new-card .footer {
+    margin-left: 200px;
+}
+.section-news .new-card .description {
+    max-height: 160px;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+/*News Preview in Admin panel*/
+.new-card .footer {
+    border-top: 1px solid rgba(0,0,0,.05);
+    padding-top: 10px;
+    line-height: 1.2;
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+.section-news .new-card .title, .section-news .new-card .description, .section-news .new-card .footer {
+    margin-left: 200px;
+}
+
+.new-card .footer .element {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.new-card .footer .divider {
+    width: 1px;
+    background: rgba(0,0,0,.05);
+    height: 10px;
+}
+.new-card .footer .element:last-child {
+    margin-right: 0;
+}
+
+.text-xs-right {
+    text-align: right !important;
+}
+
+.new-card .divider, .new-card .publication-date button, .new-card .source button {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.new-card .publication-date button, .new-card .source  button {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+/* AND News Preview in Admin panel*/

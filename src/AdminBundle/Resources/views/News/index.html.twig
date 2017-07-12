@@ -1,0 +1,78 @@
+{% extends 'AdminBundle::layout-inner.html.twig' %}
+
+{% block content %}
+    <h1>News list</h1>
+
+    {#<table class="table table-bordered">#}
+        {#<thead>#}
+            {#<tr>#}
+                {#<th>Id</th>#}
+                {#<th>Image</th>#}
+                {#<th>News_text</th>#}
+                {#<th>News_text_origin</th>#}
+                {#<th>News_text_parsed</th>#}
+                {#<th>News_title</th>#}
+                {#<th>News_description</th>#}
+                {#<th>News_id</th>#}
+                {#<th>News_site_link</th>#}
+                {#<th>News_vk_link</th>#}
+                {#<th>News_date</th>#}
+                {#<th>Createdat</th>#}
+                {#<th>Updatedat</th>#}
+                {#<th>News_date_time</th>#}
+                {#<th>Slug</th>#}
+                {#<th>Deleted</th>#}
+                {#<th>Actions</th>#}
+            {#</tr>#}
+        {#</thead>#}
+        {#<tbody>#}
+    {#<ul class="list-unstyled msg_list">#}
+    <div class="section-news">
+        {% for news in news %}
+            {{ include('AdminBundle:News:oneRow.html.twig', {'news': news}) }}
+            {#<tr>#}
+                {#<td><a href="{{ path('admin.news.show', { 'id': news.id }) }}">{{ news.id }}</a></td>#}
+                {#<td>#}
+                    {##}
+                {#</td>#}
+                {#<td>{{ news.newstextorigin }}</td>#}
+                {#<td>{{ news.newstextparsed }}</td>#}
+                {#<td>{{ news.newstitle }}</td>#}
+                {#<td>{{ news.newsdescription }}</td>#}
+                {#<td>{{ news.newsid }}</td>#}
+                {#<td>{{ news.newssitelink }}</td>#}
+                {#<td>{{ news.newsvklink }}</td>#}
+                {#<td>{{ news.newsdate }}</td>#}
+                {#<td>{% if news.createdAt %}{{ news.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                {#<td>{% if news.updatedAt %}{{ news.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                {#<td>{% if news.newsdatetime %}{{ news.newsdatetime|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                {#<td>{{ news.slug }}</td>#}
+                {#<td>{% if news.deleted %}Yes{% else %}No{% endif %}</td>#}
+                {#<td>#}
+                    {#<ul>#}
+                        {#<li>#}
+                            {#<a href="{{ path('admin.news.show', { 'id': news.id }) }}">show</a>#}
+                        {#</li>#}
+                        {#<li>#}
+                            {#<a href="{{ path('admin.news.edit', { 'id': news.id }) }}">edit</a>#}
+                        {#</li>#}
+                    {#</ul>#}
+                {#</td>#}
+            {#</tr>#}
+        {% endfor %}
+    </div>
+    {#</ul>#}
+        {#</tbody>#}
+    {#</table>#}
+
+    <div class="pagination-wrapper">
+        {{ knp_pagination_render(news) }}
+    </div>
+
+
+    <ul>
+        <li>
+            <a href="{{ path('admin.news.new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
