@@ -26,7 +26,7 @@ class NewsController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction(Request $request, $page)
+    public function indexAction(Request $request, $page = 1)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -86,7 +86,7 @@ class NewsController extends Controller
     /**
      * Finds and displays a News entity.
      *
-     * @Route("/{id}", name="admin.news.show")
+     * @Route("/{id}/show", name="admin.news.show")
      * @Method("GET")
      * @Template()
      */

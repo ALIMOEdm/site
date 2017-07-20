@@ -1,5 +1,5 @@
 <div class="new-card" itemscope>
-    <a href="{{ path('one_news_router_slug', {'slug': news.getSlug }) }}">
+    <a href="{{ path('admin.news.show', {'id': news.getId }) }}">
         {% if  news.getImage('main_news_2') %}
 
             <div itemprop="image" class="new-card-preview-image" data-role="news-image"
@@ -10,7 +10,7 @@
         {% endif %}
     </a>
 
-    <a href="{{ path('one_news_router_slug', {'slug': news.getSlug }) }}">
+    <a href="{{ path('admin.news.show', {'id': news.getId }) }}">
         {% if news.getNewsTitle %}
             <div class="title" itemprop="title">
                 {{ news.getNewsTitle }}
@@ -33,12 +33,21 @@
             <div class="col-xs-8 text-xs-left">
                 <div class="publication-date element">
                     <div class="fa fa-clock-o"></div>
-                    <button href="#" title="Отфильтровать новости по дате" class="filter-date btn btn-link"><span  itemprop="date_create">{{ news.getNewsFormatDate }}</span></button>
+                    <a class="filter-date btn btn-link"><span  itemprop="date_create">{{ news.getNewsFormatDate }}</span></a>
                 </div>
                 <div class="divider element"></div>
                 <div class="source element">
                     <div class="fa fa-newspaper-o"></div>
-                    <button href="#" title="Отфильтровать новости по группе" class="filter-group btn btn-link" itemprop="source_group">{{ news.getVkGroup.getGroupTitle }}</button>
+                    <a href="{{ news.newsvklink }}" target="_blank"  class="filter-group btn btn-link" itemprop="source_group">VK</a>
+                </div>
+                <div class="divider element"></div>
+                <div class="source element">
+                    <div class="fa fa-newspaper-o"></div>
+                    <a
+                            {% if news.newssitelink %}
+                            href="{{ news.newssitelink }}"
+                            {% endif %}
+                            target="_blank" class="filter-group btn btn-link" itemprop="source_group">{{ news.getVkGroup.getGroupTitle }}</a>
                 </div>
             </div>
             <div class="col-xs-4 text-xs-right">
@@ -50,6 +59,13 @@
                 {#<div class="fa fa-comment-o"></div><span>8</span>#}
                 {#</div>#}
             </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="row">
+            <a href="{{ path('one_news_router_slug', {'slug': news.getSlug }) }}" target="_blank" class="btn btn-success" role="button">На сайте</a>
+            <button class="btn btn-info">Редактировать</button>
+            <button class="btn btn-danger">Удалить</button>
         </div>
     </div>
 </div>

@@ -4292,6 +4292,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     max-height: 160px;
     line-height: 1.5;
     font-size: 14px;
+    overflow: hidden;
 }
 
 /*News Preview in Admin panel*/
@@ -4325,11 +4326,11 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     text-align: right !important;
 }
 
-.new-card .divider, .new-card .publication-date button, .new-card .source button {
+.new-card .divider, .new-card .publication-date a, .new-card .source a {
     margin-bottom: 0;
     margin-top: 0;
 }
-.new-card .publication-date button, .new-card .source  button {
+.new-card .publication-date a, .new-card .source  a {
     padding-top: 0;
     padding-bottom: 0;
 }
